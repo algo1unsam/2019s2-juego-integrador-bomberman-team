@@ -1,0 +1,30 @@
+import bomberman.*
+import wollok.game.*
+
+
+program BombermanGame {
+	
+//	CONFIG	
+	game.title("Bomberman Springfield")
+	game.height(10)
+	game.width(15)
+	game.ground("fondoPasto.jpg")
+
+//	VISUALES
+	game.addVisual(bomberman)
+	game.addVisual(tabernaMoe)
+	game.addVisualIn(new Pared(),game.at(2,2))
+
+//	TECLADO
+	keyboard.h().onPressDo { game.say(bomberman, "Hola chiques!") }
+	
+	//game.whenCollideDo(pepita, {cosa => cosa.teEncontre()})
+
+	keyboard.up().onPressDo { bomberman.move(bomberman.position().up(1)) }
+	keyboard.down().onPressDo { bomberman.move(bomberman.position().down(1)) }
+	keyboard.left().onPressDo { bomberman.move(bomberman.position().left(1)) }
+	keyboard.right().onPressDo { bomberman.move(bomberman.position().right(1)) }
+		
+//	START
+	game.start()
+}
