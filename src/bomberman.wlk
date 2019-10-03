@@ -7,7 +7,15 @@ object bomberman {
 	
 	method image() = "homero.png"	
 
-	method move(nuevaPosicion) {self.position(nuevaPosicion)}	
+	method move(nuevaPosicion) {self.position(nuevaPosicion)}
+	
+	method hayObjetoArriba(){return game.getObjectsIn(self.position().up(1)).isEmpty() }
+	
+	method hayObjetoAbajo(){return game.getObjectsIn(self.position().down(1)).isEmpty() }
+	
+	method hayObjetoDerecha(){return game.getObjectsIn(self.position().right(1)).isEmpty() }
+	
+	method hayObjetoIzquierda(){return game.getObjectsIn(self.position().left(1)).isEmpty() }
 	
 } //Fin bomberman
 
