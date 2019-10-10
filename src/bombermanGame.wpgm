@@ -6,34 +6,39 @@ program BombermanGame {
 	
 //	CONFIG	
 	game.title("Bomberman Springfield")
-	game.height(10)
+	game.height(15)
 	game.width(15)
-	game.ground("fondoPasto.jpg")
+	game.ground("bg_green.png")
 
 //	VISUALES
 	game.addVisual(bomberman)
 	game.addVisual(tabernaMoe)
+	
+	
+	game.addVisualIn(new Pared(),game.at(0,0))
+	game.addVisualIn(new Pared(),game.at(0,1))
+	game.addVisualIn(new Pared(),game.at(0,2))
+	game.addVisualIn(new Pared(),game.at(0,3))
+	game.addVisualIn(new Pared(),game.at(0,4))
+	game.addVisualIn(new Pared(),game.at(0,5))
+	game.addVisualIn(new Pared(),game.at(0,6))
+	game.addVisualIn(new Pared(),game.at(0,7))
+	game.addVisualIn(new Pared(),game.at(0,8))
+	game.addVisualIn(new Pared(),game.at(0,9))
+	game.addVisualIn(new Pared(),game.at(0,10))
+	game.addVisualIn(new Pared(),game.at(0,11))
+	game.addVisualIn(new Pared(),game.at(0,12))
+	game.addVisualIn(new Pared(),game.at(0,13))
+	game.addVisualIn(new Pared(),game.at(0,14))
+	game.addVisualIn(new Pared(),game.at(0,15))
+	game.addVisualIn(new Pared(),game.at(1,0))
 	game.addVisualIn(new Pared(),game.at(2,0))
-	game.addVisualIn(new Pared(),game.at(2,1))
-	game.addVisualIn(new Pared(),game.at(2,2))
-	game.addVisualIn(new Pared(),game.at(3,2))
-	game.addVisualIn(new Pared(),game.at(4,2))
-	game.addVisualIn(new Pared(),game.at(4,3))
-	game.addVisualIn(new Pared(),game.at(4,4))
-	game.addVisualIn(new Pared(),game.at(4,5))
-	game.addVisualIn(new Pared(),game.at(4,6))
-	game.addVisualIn(new Pared(),game.at(4,7))
-	game.addVisualIn(new Pared(),game.at(4,8))
-	game.addVisualIn(new Pared(),game.at(5,8))
-	game.addVisualIn(new Pared(),game.at(6,8))
-	game.addVisualIn(new Pared(),game.at(7,8))
-	game.addVisualIn(new Pared(),game.at(8,8))
-	game.addVisualIn(new Pared(),game.at(9,8))
-	game.addVisualIn(new Pared(),game.at(10,8))
+	game.addVisualIn(new Pared(),game.at(3,0))
+	game.addVisualIn(new Pared(),game.at(4,0))
 
 //	TECLADO
 	keyboard.h().onPressDo {game.say(bomberman, "Hola chiques!") }
-	
+	keyboard.space().onPressDo { bomberman.colocaBomba() }
 	keyboard.up().onPressDo {if (bomberman.hayObjetoArriba()) bomberman.move(bomberman.position().up(1))}
 	keyboard.down().onPressDo {if (bomberman.hayObjetoAbajo()) bomberman.move(bomberman.position().down(1))}
 	keyboard.left().onPressDo {if (bomberman.hayObjetoIzquierda()) bomberman.move(bomberman.position().left(1))}
