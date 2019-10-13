@@ -3,6 +3,7 @@ import wollok.game.*
 import niveles.*
 import movimientos.*
 import paredes.*
+import otrosObjetos.*
 
 program BombermanGame {
 	
@@ -10,14 +11,15 @@ program BombermanGame {
 
 	nivel1.configuracion()
 
-
-
-	
-
-
 //	TECLADO
-	keyboard.space().onPressDo { bomberman.colocaBomba() }
+	keyboard.space().onPressDo {bomberman.colocarBomba()}
+	keyboard.v().onPressDo{game.say(bomberman,"Me quedan " + bomberman.vidas().toString() + " vidas, baboso.")}
+	keyboard.b().onPressDo{game.say(bomberman,"Me quedan " + bomberman.bombas().toString() + " bombas, baboso.")}
+	
+//  VISUAL
 
+	game.whenCollideDo(bomberman,{elemento=>elemento.nosCruzamos()})
+	
 		
 //	START
 	game.start()

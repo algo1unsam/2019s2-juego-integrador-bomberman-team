@@ -10,7 +10,22 @@ class Pared {
 	
 	var property position
 	
-	method image() = "hardblock.png"
+	method image() = "pared.jpg"
+	
+	method nosCruzamos() {
+		movimientos.move(movimientos.direccion().rebote(),bomberman)
+	}
+	
+	method explotoUnaBomba() {
+		game.removeVisual(self)
+	}
+}
+
+class HardPared inherits Pared {
+	
+	override method image() = "hardblock.png"
+	
+	override method explotoUnaBomba() {}	
 }
 
 
