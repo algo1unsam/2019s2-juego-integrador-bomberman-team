@@ -9,15 +9,24 @@ import paredes.*
 class Pared {
 	
 	var property position
+	var property imagenPared = "softblock.png"
 	
-	method image() = "pared.jpg"
+	method image() = imagenPared 
 	
 	method nosCruzamos() {
 		movimientos.move(movimientos.direccion().rebote(),bomberman)
 	}
 	
 	method explotoUnaBomba() {
+		imagenPared = "explosion1.jpg"
+		game.onTick(500,"Explosion"+self,{ => self.removerExplosion()})	
+		
+		
+	}
+	
+	method removerExplosion(){
 		game.removeVisual(self)
+		game.removeTickEvent("Explosion"+self)
 	}
 }
 

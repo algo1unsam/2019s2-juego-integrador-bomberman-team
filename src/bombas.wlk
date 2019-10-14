@@ -1,6 +1,7 @@
 import bomberman.*
 import wollok.game.*
 import paredes.*
+import movimientos.*
 
 
 class Bomba {
@@ -9,13 +10,24 @@ class Bomba {
 	
 	var property position
 	
+	var property imagenBomba = "bomba.png"
+	
 	method nosCruzamos() {}
 	
 	method explotoUnaBomba() {
-		game.removeVisual(self)
+		imagenBomba = "explosion1.jpg"
+		game.onTick(500,"Explosion1",{ => self.removerExplosion()})	
+		
+		
 	}
 	
-	method image() = "bomba.jpg"
+	method removerExplosion(){
+		game.removeVisual(self)
+		game.removeTickEvent("Explosion1")
+	}
+	
+
+	method image() = imagenBomba
 	
 	method activarBomba() {
 		game.onTick(2000,"Explota bomba",{=>self.estallar()})
@@ -28,5 +40,6 @@ class Bomba {
 		game.getObjectsIn(self.position().down(1)).forEach({elemento=>elemento.explotoUnaBomba()})
 		game.getObjectsIn(self.position().left(1)).forEach({elemento=>elemento.explotoUnaBomba()})
 		game.getObjectsIn(self.position().right(1)).forEach({elemento=>elemento.explotoUnaBomba()})
+		
 	}
 } // Fin clase Bomba
