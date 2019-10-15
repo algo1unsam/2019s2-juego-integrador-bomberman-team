@@ -2,9 +2,8 @@ import bomberman.*
 import wollok.game.*
 import movimientos.*
 import niveles.*
-import paredes.*
-
-
+import bombas.*
+import otrosObjetos.*
 
 class Pared {
 	

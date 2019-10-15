@@ -3,7 +3,7 @@ import wollok.game.*
 import movimientos.*
 import paredes.*
 import otrosObjetos.*
-
+import bombas.*
 
 object nivel1 {
 	
@@ -21,11 +21,9 @@ object nivel1 {
 		game.addVisualIn(new Pared(),game.at(3,3))
 		game.addVisualIn(new Pared(),game.at(2,2))
 		game.addVisualIn(new Pared(),game.at(4,2))
-		game.addVisualIn(new Pared(),game.at(3,1))
 				
 		game.onTick(20000,"Agregar rosquilla",{tablero.agregarRosquilla()})
-		game.onTick(30000,"Sumar bombas a la planta",{plantaNuclear.bombas(5)})
-		
+		game.onTick(15000,"Sumar bombas a la planta",{plantaNuclear.fabricarBombas()})
 		
 		const ancho = game.width() - 1
 		const largo = game.height() - 1
