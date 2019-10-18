@@ -1,6 +1,8 @@
 import wollok.game.*
 import bombas.*
 import otrosObjetos.*
+import movimientos.*
+import paredes.*
 
 /*  METODOS COMUNES
  * 	
@@ -77,3 +79,40 @@ object tabernaMoe {
 
 } //Fin tabernaMoe
 
+object burns {
+	
+	var direccion = moverDer
+	
+	var property position = game.at(3,6)
+	
+	var property limite1 = game.at(1,6)
+	
+	var property limite2 = game.at(13,6)
+	
+	method patrulla(){ direccion.mover(self) }
+	
+	method image() = "burns.png"
+	
+	method tocaParedIzq(){}
+	method tocaParedDer(){}
+	
+	method direccionIzq(){return direccion==moverIzq}
+	
+	method cambioDir(){if (self.direccionIzq()) direccion = moverDer else direccion = moverIzq}
+	
+}
+
+object moverIzq{
+	
+	method mover(enemigo){if (!(enemigo.position() == enemigo.limite1()) ) movimientos.move(izquierda,enemigo) else enemigo.cambioDir()}
+	
+}
+
+object moverDer{
+	
+	method mover(enemigo){if (!(enemigo.position() == enemigo.limite2())) movimientos.move(derecha,enemigo) else enemigo.cambioDir()}
+	
+}
+
+//  (!(enemigo.position() == enemigo.limite1()))
+//  (!(enemigo.position() == enemigo.limite2()))

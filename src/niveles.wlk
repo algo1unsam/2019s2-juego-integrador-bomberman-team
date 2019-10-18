@@ -4,6 +4,7 @@ import movimientos.*
 import paredes.*
 import otrosObjetos.*
 import bombas.*
+import paredes.*
 
 object nivel1 {
 	
@@ -17,13 +18,15 @@ object nivel1 {
 
 		game.addVisual(bomberman)
 		game.addVisual(tabernaMoe)	
-		game.addVisual(plantaNuclear)	
+		game.addVisual(plantaNuclear)
+		game.addVisual(burns)
 		game.addVisualIn(new Pared(),game.at(3,3))
 		game.addVisualIn(new Pared(),game.at(2,2))
 		game.addVisualIn(new Pared(),game.at(4,2))
 				
 		game.onTick(20000,"Agregar rosquilla",{tablero.agregarRosquilla()})
 		game.onTick(15000,"Sumar bombas a la planta",{plantaNuclear.fabricarBombas()})
+		game.onTick(800,"burns",{burns.patrulla()})
 		
 		const ancho = game.width() - 1
 		const largo = game.height() - 1
