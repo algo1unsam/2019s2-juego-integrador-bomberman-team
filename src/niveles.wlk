@@ -20,6 +20,7 @@ object nivel1 {
 		game.addVisual(tabernaMoe)	
 		game.addVisual(plantaNuclear)
 		game.addVisual(burns)
+		game.addVisual(bart)
 		game.addVisualIn(new Pared(),game.at(3,3))
 		game.addVisualIn(new Pared(),game.at(2,2))
 		game.addVisualIn(new Pared(),game.at(4,2))

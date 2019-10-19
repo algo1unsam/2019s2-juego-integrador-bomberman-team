@@ -43,6 +43,4 @@ object moldeadoParedes {
 	method draw(paredes, posicion) {
 		posicion.drawElement(paredes)
 	}
-	
-
 }
