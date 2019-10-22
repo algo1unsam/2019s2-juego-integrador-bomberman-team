@@ -29,7 +29,7 @@ object movimientos {
 		personaje.position(sentido.hacia(personaje.position()))
 	}
 	
-	}
+} //Fin movimientos
 
 object izquierda { 
 	method hacia(position) = position.left(1) 

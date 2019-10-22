@@ -8,13 +8,13 @@ import otrosObjetos.*
 
 class Bomba {
 	
-	const property elementosAlrededor = []
-	
 	var property position
 	
 	var property imagenBomba = "bomba.png"
 	
-	method nosCruzamos() {}
+	method image() = imagenBomba
+	
+	method nosCruzamos(quien) {}
 	
 	method explotoUnaBomba() {
 		imagenBomba = "explosion1.jpg"
@@ -25,9 +25,6 @@ class Bomba {
 		game.removeVisual(self)
 		game.removeTickEvent("Explosion1")
 	}
-	
-
-	method image() = imagenBomba
 	
 	method activarBomba() {
 		game.onTick(2000,"Explota bomba",{=>self.estallar()})

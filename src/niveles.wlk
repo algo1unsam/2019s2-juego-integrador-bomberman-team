@@ -21,13 +21,19 @@ object nivel1 {
 		game.addVisual(plantaNuclear)
 		game.addVisual(burns)
 		game.addVisual(bart)
+		
 		game.addVisualIn(new Pared(),game.at(3,3))
 		game.addVisualIn(new Pared(),game.at(2,2))
 		game.addVisualIn(new Pared(),game.at(4,2))
+		game.addVisualIn(new Pared(),game.at(9,8))
 				
 		game.onTick(20000,"Agregar rosquilla",{tablero.agregarRosquilla()})
 		game.onTick(15000,"Sumar bombas a la planta",{plantaNuclear.fabricarBombas()})
 		game.onTick(800,"burns",{burns.patrulla()})
+		game.onTick(1500,"Bart dispara",{bart.disparar()})
+		game.onTick(15314,"Agregar pared",{tablero.agregarPared()})
+		game.onTick(20314,"Agregar pared",{tablero.agregarHardPared()})
+		
 		
 		const ancho = game.width() - 1
 		const largo = game.height() - 1

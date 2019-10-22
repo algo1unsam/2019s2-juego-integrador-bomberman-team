@@ -57,6 +57,27 @@ object bomberman {
 			rosquillas = 0
 		}
 	}
+	
+	method chocarPared() {
+		movimientos.move(movimientos.direccion().rebote(),self)
+	}
+	method encontrarBart() {}
+	method encontrarBurns() {
+		game.say(burns,"Vaya a trabajar!")
+		self.perderVida()
+	}
+	method llegarATaberna() {
+		game.say(tabernaMoe, "Llegaste! Te merecés una cerveza.")
+	}
+	method llegarAPlantaNuclear() {
+		self.sumarBombas(bombas)
+		plantaNuclear.restarBombas()
+	}
+	method golpeadoPorPiedra() {
+		game.say(self,"D'oh! Pequeño demonio!")
+		self.perderVida()
+	}
+	
 
 } //Fin bomberman
 

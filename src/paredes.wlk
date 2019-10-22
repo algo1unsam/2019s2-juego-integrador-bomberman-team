@@ -12,8 +12,8 @@ class Pared {
 	
 	method image() = imagenPared 
 	
-	method nosCruzamos() {
-		movimientos.move(movimientos.direccion().rebote(),bomberman)
+	method nosCruzamos(quien) {
+		quien.chocarPared()
 	}
 	
 	method explotoUnaBomba() {
