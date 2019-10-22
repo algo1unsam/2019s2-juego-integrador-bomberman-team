@@ -8,8 +8,13 @@ import otrosObjetos.*
 program BombermanGame {
 	
 //	CONFIG	
-
+	game.title("Bomberman Springfield")
+	game.height(15)
+	game.width(15)
+	game.ground("bg_green.png")
+	
 	nivel1.configuracion()
+	
 
 //	TECLADO
 	keyboard.space().onPressDo {bomberman.colocarBomba()}
@@ -17,10 +22,11 @@ program BombermanGame {
 	keyboard.b().onPressDo{game.say(bomberman,"Me quedan " + bomberman.bombas().toString() + " bombas, baboso.")}
 	keyboard.b().onPressDo{game.say(plantaNuclear,"Me quedan " + plantaNuclear.cuantasBombasHay().toString() + " bombas, baboso.")}
 	
+	//RESTO
+	game.whenCollideDo(bomberman,{elemento=>elemento.nosCruzamos(bomberman)})
 	
 //  VISUAL
-
-	game.whenCollideDo(bomberman,{elemento=>elemento.nosCruzamos(bomberman)})
+	
 		
 //	START
 	game.start()
