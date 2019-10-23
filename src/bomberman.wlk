@@ -9,7 +9,13 @@ import paredes.*
  * 	method image()
  * 	method explotoUnaBomba()
  * 	method nosCruzamos()
- * 	
+ * 	method chocarConAlgo() {}
+ *	method encontrarRosquilla() {}
+ *  method encontrarBart() ****Para personajes que se mueven****
+ * 	method golpeadoPorPiedra()
+ *  method llegarAPlantaNuclear() *****Para personajes que se mueven****
+ * 	method llegarATaberna() ****Para personajes que se mueven****
+ * 	method encontrarRosquilla() ****Para personajes que se mueven****
  */
 object bomberman {
 
@@ -17,8 +23,11 @@ object bomberman {
 	var property vidas = 3
 	var property rosquillas = 0
 	var property bombas = 3
+	
+	var property imagen = "homero-der.png"
+	var property direccion
 
-	method image() = "homero.png"
+	method image() = imagen  //if (direccion == izquierda) "homero-izq.png" else "homero-der.png"
 	
 	method cuantasVidas() {
 		game.say(self, "D'oh! Me quedan " + self.vidas().toString() + " vidas.")
@@ -68,7 +77,7 @@ object bomberman {
 	}
 	
 	method chocarPared() {
-		movimientos.move(movimientos.direccion().rebote(),self)
+		movimientos.rebotar(self,direccion)
 	}
 	method encontrarBart() {}
 	method encontrarBurns() {
@@ -89,6 +98,3 @@ object bomberman {
 	
 
 } //Fin bomberman
-
-//  (!(enemigo.position() == enemigo.limite1()))
-//  (!(enemigo.position() == enemigo.limite2()))

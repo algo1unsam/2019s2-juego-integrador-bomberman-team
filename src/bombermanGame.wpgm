@@ -20,6 +20,7 @@ program BombermanGame {
 //  VISUAL
 
 	game.whenCollideDo(bomberman,{elemento=>elemento.nosCruzamos(bomberman)})
+	game.onCollideDo(burns,{elemento=>elemento.nosCruzamos(burns)})
 			
 //	START
 	game.start()

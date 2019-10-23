@@ -36,8 +36,6 @@ class HardPared inherits Pared {
 	override method explotoUnaBomba() {}	
 }
 
-
-
 object moldeadoParedes {
 	
 	method draw(paredes, posicion) {

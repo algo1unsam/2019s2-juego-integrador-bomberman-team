@@ -8,25 +8,30 @@ import paredes.*
 
 object movimientos {
 
-	var property direccion
+	
 
 	method movimiento(personaje){
 		
-
 		keyboard.left().onPressDo {self.move(izquierda, personaje)}
-		keyboard.left().onPressDo {direccion = izquierda}
 		keyboard.right().onPressDo {self.move(derecha, personaje)}
-		keyboard.right().onPressDo {direccion = derecha}
 		keyboard.up().onPressDo {self.move(arriba, personaje)}
-		keyboard.up().onPressDo {direccion = arriba}
 		keyboard.down().onPressDo {self.move(abajo, personaje)}
-		keyboard.down().onPressDo {direccion = abajo}
+		keyboard.left().onPressDo {bomberman.direccion(izquierda)}
+		keyboard.right().onPressDo {bomberman.direccion(derecha)}
+		keyboard.up().onPressDo {bomberman.direccion(arriba)}
+		keyboard.down().onPressDo {bomberman.direccion(abajo)}
+		keyboard.left().onPressDo {bomberman.imagen("homero-izq.png")}
+		keyboard.right().onPressDo {bomberman.imagen("homero-der.png")}
 		
 	}
 
 
 	method move(sentido, personaje) {
 		personaje.position(sentido.hacia(personaje.position()))
+	}
+	
+	method rebotar(quien,sentido) {
+		self.move(sentido.rebote(),quien)
 	}
 	
 } //Fin movimientos

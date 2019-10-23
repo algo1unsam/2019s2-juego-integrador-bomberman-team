@@ -95,37 +95,48 @@ object tabernaMoe {
 
 object burns {
 	
-	var direccion = moverDer
+	//var direccion = moverIzq
+	
+	var property direccion = izquierda
 	
 	var property position = game.at(3,6)
-	var property limite1 = game.at(1,6)
-	var property limite2 = game.at(13,6)
+	//var property limite1 = game.at(1,6)
+	//var property limite2 = game.at(13,6)
 	
-	method patrulla(){ direccion.mover(self) }
+	//method patrulla(){ direccion.mover(self) }
 	
-	method image() = "burns.png"
+	method patrulla() {movimientos.move(direccion,self)}
 	
-	method tocaParedIzq(){}
-	method tocaParedDer(){}
+	method image() =  if (self.direccion() == izquierda) "burns-izq.png" else "burns-der.png"
 	
-	method direccionIzq(){return direccion==moverIzq}
+	method nosCruzamos(quien) {quien.encontrarBurns()}
 	
-	method cambioDir(){if (self.direccionIzq()) direccion = moverDer else direccion = moverIzq}
+	//method direccionIzq(){return direccion==moverIzq}
+	
+	//method cambioDir(){if (self.direccionIzq()) direccion = moverDer else direccion = moverIzq}
 	
 	method golpeadoPorPiedra() {game.say(self,"Smithers! Estoy siendo atacado!")}
-	
-	method nosCruzamos(quien) {
-		quien.encontrarBurns()
-	}
-	
+		
 	method explotoUnaBomba() {
 		game.say(self,"Intenta matarme? Está despedido!")
 		bomberman.perderVida()
 	}
+	
+	method encontrarRosquilla() {}
+	
+	method chocarPared() {
+		movimientos.rebotar(self,direccion)
+		direccion = direccion.rebote()
+	}
+	
+	method encontrarBart() {}
+	method llegarATaberna() {game.say(tabernaMoe, "Largo de aquí!")}
+	method llegarAPlantaNuclear() {}
+
 } //Fin burns
 
-object moverIzq{method mover(enemigo){if (!(enemigo.position() == enemigo.limite1())) movimientos.move(izquierda,enemigo) else enemigo.cambioDir()}}
-object moverDer{method mover(enemigo){if (!(enemigo.position() == enemigo.limite2())) movimientos.move(derecha,enemigo) else enemigo.cambioDir()}}
+//object moverIzq{method mover(enemigo){if (!(enemigo.position() == enemigo.limite1())) movimientos.move(izquierda,enemigo) else enemigo.cambioDir()}}
+//object moverDer{method mover(enemigo){if (!(enemigo.position() == enemigo.limite2())) movimientos.move(derecha,enemigo) else enemigo.cambioDir()}}
 
 object bart {
 	
@@ -149,28 +160,23 @@ class Piedra {
 	
 	var property position
 	
-	
 	method image() = "piedra.jpg"
 	
 	method nosCruzamos(quien) {
 		quien.golpeadoPorPiedra()
 		game.removeVisual(self)
 	}
-			
-	method explotoUnaBomba() {}
-	
-	method chocarConAlgo() {
-	}
 	
 	method chocarPared() {
 		game.removeTickEvent("Explota bomba"+self.identity())
 		game.removeVisual(self)
 	}
-	
-	method encontrarRosquilla() {}
-	
 	method serDisparada() {
 		game.onTick(100,"Explota bomba"+self.identity(),{=>movimientos.move(abajo,self)})
 	}
+	
+	method chocarConAlgo() {}
+	method encontrarRosquilla() {}
+	method explotoUnaBomba() {}
 } //Fin piedra
 
