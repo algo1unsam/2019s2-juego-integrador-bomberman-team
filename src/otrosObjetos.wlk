@@ -6,7 +6,7 @@ import movimientos.*
 import bomberman.*
 
 object tablero {
-
+	
 	method agregarRosquilla() {
 		var randomPosition = game.at(0.randomUpTo(10), 0.randomUpTo(10))
 		if (self.posicionVacia(randomPosition)) {
@@ -63,7 +63,10 @@ object plantaNuclear {
 		bombas = bombas - bombas
 	}
 	
-	method explotoUnaBomba() {bomberman.vidas(0)}
+	method explotoUnaBomba() {
+		bomberman.perderTodasLasVidas()
+		bomberman.cuantasVidas()
+	}
 	
 	method nosCruzamos(quien) {
 		quien.llegarAPlantaNuclear()
@@ -137,6 +140,7 @@ object bart {
 	method disparar() {
 		var piedra = new Piedra(position = self.position())
 		game.addVisual(piedra)
+		game.onCollideDo(piedra, {elemento=>elemento.nosCruzamos(piedra)})
 		piedra.serDisparada()
 	}
 }
@@ -144,6 +148,7 @@ object bart {
 class Piedra {
 	
 	var property position
+	
 	
 	method image() = "piedra.jpg"
 	
@@ -155,17 +160,17 @@ class Piedra {
 	method explotoUnaBomba() {}
 	
 	method chocarConAlgo() {
-		game.whenCollideDo(self, {elemento=>elemento.nosCruzamos(self)})
 	}
 	
 	method chocarPared() {
+		game.removeTickEvent("Explota bomba"+self.identity())
 		game.removeVisual(self)
 	}
 	
 	method encontrarRosquilla() {}
 	
 	method serDisparada() {
-		game.onTick(100,"Explota bomba",{=>movimientos.move(abajo,self)})	
+		game.onTick(100,"Explota bomba"+self.identity(),{=>movimientos.move(abajo,self)})
 	}
 } //Fin piedra
 

@@ -19,14 +19,23 @@ object bomberman {
 	var property bombas = 3
 
 	method image() = "homero.png"
+	
+	method cuantasVidas() {
+		game.say(self, "D'oh! Me quedan " + self.vidas().toString() + " vidas.")
+	}
 
 	method explotoUnaBomba() {
 		self.perderVida()
-		game.say(self, "D'oh! Me quedan " + self.vidas().toString() + " vidas.")
+		self.cuantasVidas()
 	}
 	
 	method perderVida() {
 		vidas = vidas - 1
+		position = game.at(1,1)
+	}
+	
+	method perderTodasLasVidas() {
+		vidas = 0
 		position = game.at(1,1)
 	}
 	
@@ -70,7 +79,7 @@ object bomberman {
 		game.say(tabernaMoe, "Llegaste! Te merecés una cerveza.")
 	}
 	method llegarAPlantaNuclear() {
-		self.sumarBombas(bombas)
+		self.sumarBombas(plantaNuclear.cuantasBombasHay())
 		plantaNuclear.restarBombas()
 	}
 	method golpeadoPorPiedra() {
