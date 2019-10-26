@@ -42,7 +42,6 @@ object moldeadoParedes {
 	}
 }
 
-
 object paredesLimites{
 
 	const ancho = game.width() - 1
@@ -75,3 +74,7 @@ object paredesNivel1 {
 	}
 	
 } //Fin paredesNivel1
+
+
+
+

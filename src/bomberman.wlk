@@ -51,6 +51,10 @@ object bomberman {
 	method sumarBombas(cantBombas) {
 		bombas = bombas + cantBombas
 	}
+	
+	method sumarBombas() {
+		if (bombas < 3) bombas = bombas + 1
+	}
 
 	method colocarBomba() {
 		if (bombas == 0) {
@@ -79,22 +83,27 @@ object bomberman {
 	method chocarPared() {
 		movimientos.rebotar(self,direccion)
 	}
+
 	method encontrarBart() {}
+
 	method encontrarBurns() {
 		game.say(burns,"Vaya a trabajar!")
 		self.perderVida()
 	}
+
 	method llegarATaberna() {
 		game.say(tabernaMoe, "Llegaste! Te merecés una cerveza.")
 	}
+
 	method llegarAPlantaNuclear() {
 		self.sumarBombas(plantaNuclear.cuantasBombasHay())
+		self.sumarBombas()
 		plantaNuclear.restarBombas()
 	}
+
 	method golpeadoPorPiedra() {
 		game.say(self,"D'oh! Pequeño demonio!")
 		self.perderVida()
 	}
-	
 
 } //Fin bomberman

@@ -8,8 +8,6 @@ import paredes.*
 
 object movimientos {
 
-	
-
 	method movimiento(personaje){
 		
 		keyboard.left().onPressDo {self.move(izquierda, personaje)}
@@ -24,7 +22,6 @@ object movimientos {
 		keyboard.right().onPressDo {bomberman.imagen("homero-der.png")}
 		
 	}
-
 
 	method move(sentido, personaje) {
 		personaje.position(sentido.hacia(personaje.position()))

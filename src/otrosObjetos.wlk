@@ -97,13 +97,9 @@ object burns {
 	
 	//var direccion = moverIzq
 	
-	var property direccion = derecha
+	var property direccion = izquierda
 	
 	var property position = game.at(3,6)
-	//var property limite1 = game.at(1,6)
-	//var property limite2 = game.at(13,6)
-	
-	//method patrulla(){ direccion.mover(self) }
 	
 	method patrulla() {movimientos.move(direccion,self)}
 	
@@ -135,9 +131,6 @@ object burns {
 
 } //Fin burns
 
-//object moverIzq{method mover(enemigo){if (!(enemigo.position() == enemigo.limite1())) movimientos.move(izquierda,enemigo) else enemigo.cambioDir()}}
-//object moverDer{method mover(enemigo){if (!(enemigo.position() == enemigo.limite2())) movimientos.move(derecha,enemigo) else enemigo.cambioDir()}}
-
 object bart {
 	
 	var property position = game.at(9,13)
@@ -153,6 +146,7 @@ object bart {
 		game.addVisual(piedra)
 		game.onCollideDo(piedra, {elemento=>elemento.nosCruzamos(piedra)})
 		piedra.serDisparada()
+		game.onTick(5000,"Fuerapiedra",{=>piedra.chocarPared()})
 	}
 }
 
@@ -165,17 +159,27 @@ class Piedra {
 	method nosCruzamos(quien) {
 		quien.golpeadoPorPiedra()
 		game.removeVisual(self)
+		game.removeTickEvent("Tirapiedra")
+	}
+
+
+			
+	method chocarConAlgo() {
+		game.whenCollideDo(self, {alguien=>self.nosCruzamos(alguien)})
 	}
 	
 	method chocarPared() {
 		game.removeTickEvent("Explota bomba"+self.identity())
 		game.removeVisual(self)
+		game.removeTickEvent("Tirapiedra")
+		game.removeTickEvent("Fuerapiedra")
 	}
 	method serDisparada() {
 		game.onTick(100,"Explota bomba"+self.identity(),{=>movimientos.move(abajo,self)})
+		game.onTick(100,"Tirapiedra",{=>movimientos.move(abajo,self)})
 	}
 	
-	method chocarConAlgo() {}
+
 	method encontrarRosquilla() {}
 	method explotoUnaBomba() {}
 } //Fin piedra
