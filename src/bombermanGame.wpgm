@@ -15,28 +15,15 @@ program BombermanGame {
 	game.width(15)
 	game.ground("bg_green.png")
 
-
-	game.title("Bomberman Springfield")
-	game.height(15)
-	game.width(15)
-	game.ground("bg_green.png")
-	
-
 	nivel1.configuracion()
 	
-
 //	TECLADO
 	keyboard.space().onPressDo {bomberman.colocarBomba()}
 	keyboard.v().onPressDo{game.say(bomberman,"Me quedan " + bomberman.vidas().toString() + " vidas, baboso.")}
 	keyboard.b().onPressDo{game.say(bomberman,"Me quedan " + bomberman.bombas().toString() + " bombas, baboso.")}
 	keyboard.b().onPressDo{game.say(plantaNuclear,"Me quedan " + plantaNuclear.cuantasBombasHay().toString() + " bombas, baboso.")}
 
-//RESTO
-
-
-	
-	//RESTO
-	game.whenCollideDo(bomberman,{elemento=>elemento.nosCruzamos(bomberman)})
+//	RESTO
 
 //  VISUAL
 
