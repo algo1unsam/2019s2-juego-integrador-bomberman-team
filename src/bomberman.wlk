@@ -92,7 +92,8 @@ object bomberman {
 	}
 
 	method llegarATaberna() {
-		game.say(tabernaMoe, "Llegaste! Te merecés una cerveza.")
+		game.clear()
+		// iniciamos nivel 2
 	}
 
 	method llegarAPlantaNuclear() {

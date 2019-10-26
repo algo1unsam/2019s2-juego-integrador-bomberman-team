@@ -20,6 +20,7 @@ class Bomba {
 		imagenBomba = "explosion1.jpg"
 		game.onTick(500,"Explosion1",{ => self.removerExplosion()})	
 	}
+
 	
 	method removerExplosion(){
 		game.removeVisual(self)

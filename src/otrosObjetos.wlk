@@ -53,7 +53,7 @@ class Rosquilla {
 object plantaNuclear {
 	
 	var bombas = 5
-	var property position = game.at(13,3)
+	var property position = game.at(10,3)
 	
 	method image() = "plantaNuclear.jpg"
 	
@@ -81,7 +81,7 @@ object plantaNuclear {
 
 object tabernaMoe {
 
-	var position = game.at(10, 10)
+	var position = game.at(12, 13)
 
 	method image() = "tabernaMoe.jpg"
 
@@ -99,7 +99,7 @@ object burns {
 	
 	var property direccion = izquierda
 	
-	var property position = game.at(3,6)
+	var property position = game.at(6,6)
 	
 	method patrulla() {movimientos.move(direccion,self)}
 	
@@ -133,18 +133,22 @@ object burns {
 
 object bart {
 	
-	var property position = game.at(9,13)
+	var property position = game.at(13,13)
 	
 	method image() = "bart.jpg"
 	
-	method explotoUnaBomba() {}
+	method explotoUnaBomba() {
+		game.removeTickEvent("Bart dispara")
+		game.removeVisual(self)
+		
+	}
 	
 	method nosCruzamos(quien) {}
 	
 	method disparar() {
 		var piedra = new Piedra(position = self.position())
 		game.addVisual(piedra)
-		game.onCollideDo(piedra, {elemento=>elemento.nosCruzamos(piedra)})
+		game.whenCollideDo(piedra, {elemento=>elemento.nosCruzamos(piedra)})
 		piedra.serDisparada()
 		game.onTick(5000,"Fuerapiedra",{=>piedra.chocarPared()})
 	}
