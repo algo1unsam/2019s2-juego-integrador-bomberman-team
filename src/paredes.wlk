@@ -59,3 +59,19 @@ object paredesLimites{
 		(0 .. largo).forEach { z => moldeadoParedes.draw(new HardPared(), new Position(x=ancho, y=z)) } 
 	}
 }
+
+object paredesNivel1 {
+	
+	const ancho = game.width() - 1
+	const largo = game.height() - 1
+		
+		method paredesNivelUno(){
+		// Moldeado de paredes en Nivel 1
+		
+		(1 .. ancho-1).forEach { z => moldeadoParedes.draw(new Pared(),new Position(x=z*2, y=z*2)) } 
+	//	(1 .. ancho-1).forEach { z => moldeadoParedes.draw(new HardPared(), new Position(x=z, y=largo)) }  
+		(0 .. largo).forEach { z => moldeadoParedes.draw(new Pared(), new Position(x=(z*2), y=largo-(z*2)) ) } 
+	//	(0 .. largo).forEach { z => moldeadoParedes.draw(new HardPared(), new Position(x=ancho, y=z)) } 
+		
+	}
+}

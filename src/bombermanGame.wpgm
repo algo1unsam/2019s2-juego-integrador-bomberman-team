@@ -24,6 +24,7 @@ program BombermanGame {
 	
 	//RESTO
 	game.whenCollideDo(bomberman,{elemento=>elemento.nosCruzamos(bomberman)})
+
 	
 //  VISUAL
 	

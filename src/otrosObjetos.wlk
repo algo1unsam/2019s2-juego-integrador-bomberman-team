@@ -94,8 +94,8 @@ object burns {
 	
 	var direccion = moverDer
 	
-	var property position = game.at(3,6)
-	var property limite1 = game.at(1,6)
+	var property position = game.at(10,6)
+	var property limite1 = game.at(9,6)
 	var property limite2 = game.at(13,6)
 	
 	method patrulla(){ direccion.mover(self) }
@@ -138,6 +138,7 @@ object bart {
 		var piedra = new Piedra(position = self.position())
 		game.addVisual(piedra)
 		piedra.serDisparada()
+		game.onTick(5000,"Fuerapiedra",{=>piedra.chocarPared()})
 	}
 }
 
@@ -150,22 +151,25 @@ class Piedra {
 	method nosCruzamos(quien) {
 		quien.golpeadoPorPiedra()
 		game.removeVisual(self)
+		game.removeTickEvent("Tirapiedra")
 	}
 			
 	method explotoUnaBomba() {}
 	
 	method chocarConAlgo() {
-		game.whenCollideDo(self, {elemento=>elemento.nosCruzamos(self)})
+		game.whenCollideDo(self, {alguien=>self.nosCruzamos(alguien)})
 	}
 	
 	method chocarPared() {
 		game.removeVisual(self)
+		game.removeTickEvent("Tirapiedra")
+		game.removeTickEvent("Fuerapiedra")
 	}
 	
 	method encontrarRosquilla() {}
 	
 	method serDisparada() {
-		game.onTick(100,"Explota bomba",{=>movimientos.move(abajo,self)})	
+		game.onTick(100,"Tirapiedra",{=>movimientos.move(abajo,self)})
 	}
 } //Fin piedra
 

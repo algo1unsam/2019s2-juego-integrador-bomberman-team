@@ -30,8 +30,8 @@ object bomberman {
 		position = game.at(1,1)
 	}
 	
-	method sumarBombas(cantBombas) {
-		bombas = bombas + cantBombas
+	method sumarBombas() {
+		if (bombas < 3)bombas = bombas + 1
 	}
 
 	method colocarBomba() {
@@ -70,7 +70,7 @@ object bomberman {
 		game.say(tabernaMoe, "Llegaste! Te merecés una cerveza.")
 	}
 	method llegarAPlantaNuclear() {
-		self.sumarBombas(bombas)
+		self.sumarBombas()
 		plantaNuclear.restarBombas()
 	}
 	method golpeadoPorPiedra() {

@@ -12,19 +12,22 @@ object nivel1 {
 
 		
 		movimientos.movimiento(bomberman)
+		paredesNivel1.paredesNivelUno()
 		paredesLimites.construirLimites()
+		
 		self.personajes()
 
 		
-		game.addVisualIn(new Pared(),game.at(3,3))
-		game.addVisualIn(new Pared(),game.at(2,2))
-		game.addVisualIn(new Pared(),game.at(4,2))
-		game.addVisualIn(new Pared(),game.at(9,8))
+	// 	game.addVisualIn(new Pared(),game.at(3,3))
+	//	game.addVisualIn(new Pared(),game.at(2,2))
+	//	game.addVisualIn(new Pared(),game.at(4,2))
+	//	game.addVisualIn(new Pared(),game.at(9,8))
+	
 				
 		game.onTick(20000,"Agregar rosquilla",{tablero.agregarRosquilla()})
 		game.onTick(15000,"Sumar bombas a la planta",{plantaNuclear.fabricarBombas()})
 		game.onTick(800,"burns",{burns.patrulla()})
-		game.onTick(1500,"Bart dispara",{bart.disparar()})
+		game.onTick(2000,"Bart dispara",{bart.disparar()})
 
 	}
 	
