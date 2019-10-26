@@ -97,7 +97,7 @@ object burns {
 	
 	//var direccion = moverIzq
 	
-	var property direccion = izquierda
+	var property direccion = derecha
 	
 	var property position = game.at(3,6)
 	//var property limite1 = game.at(1,6)
