@@ -99,11 +99,11 @@ object burns {
 	
 	var property direccion = izquierda
 	
-	var property position = game.at(6,6)
-	
+	var property position = game.at(9,13)
+		
 	method patrulla() {movimientos.move(direccion,self)}
 	
-	method image() =  if (self.direccion() == izquierda) "burns-izq.png" else "burns-der.png"
+	method image() =  if (self.direccion()== izquierda) "burns-izq.png" else "burns-der.png"
 	
 	method nosCruzamos(quien) {quien.encontrarBurns()}
 	

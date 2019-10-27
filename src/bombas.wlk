@@ -20,7 +20,7 @@ class Bomba {
 		imagenBomba = "explosion1.jpg"
 		game.onTick(500,"Explosion1",{ => self.removerExplosion()})	
 	}
-
+		
 	
 	method removerExplosion(){
 		game.removeVisual(self)
@@ -29,6 +29,7 @@ class Bomba {
 	
 	method activarBomba() {
 		game.onTick(2000,"Explota bomba",{=>self.estallar()})
+			
 	}
 	
 	method estallar() {
@@ -39,5 +40,6 @@ class Bomba {
 		game.getObjectsIn(self.position().left(1)).forEach({elemento=>elemento.explotoUnaBomba()})
 		game.getObjectsIn(self.position().right(1)).forEach({elemento=>elemento.explotoUnaBomba()})
 		
+	
 	}
 } // Fin clase Bomba
