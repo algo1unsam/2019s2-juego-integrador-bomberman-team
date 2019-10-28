@@ -22,7 +22,7 @@ object bomberman {
 	var property position = game.at(1, 1)
 	var property vidas = 3
 	var property rosquillas = 0
-	var property bombas = 3
+	var property bombas = 10
 	
 	var property imagen = "homero-der.png"
 	var property direccion

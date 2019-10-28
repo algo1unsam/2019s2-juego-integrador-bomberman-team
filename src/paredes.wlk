@@ -86,7 +86,3 @@ object paredesNivel1 {
 	}
 	
 } //Fin paredesNivel1
-
-
-
-

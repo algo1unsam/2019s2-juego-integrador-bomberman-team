@@ -4,18 +4,19 @@ import niveles.*
 import bombas.*
 import movimientos.*
 import bomberman.*
+import contadores.*
 
 object tablero {
+	
+	method posicionVacia(posicion) {
+		return game.getObjectsIn(posicion).isEmpty()
+	}
 	
 	method agregarRosquilla() {
 		var randomPosition = game.at(0.randomUpTo(10), 0.randomUpTo(10))
 		if (self.posicionVacia(randomPosition)) {
 			game.addVisual(new Rosquilla(position = randomPosition))
 		}
-	}
-	
-	method posicionVacia(posicion) {
-		return game.getObjectsIn(posicion).isEmpty()
 	}
 	
 	method agregarPared() {
@@ -30,6 +31,18 @@ object tablero {
 		if (self.posicionVacia(randomPosition)) {
 			game.addVisual(new HardPared(position = randomPosition))
 		}
+	}
+	
+	method contadores() {
+	game.addVisualIn(contadorVidas,game.at(1,14))
+	game.addVisualIn(decenaVidas,game.at(2,14))
+	game.addVisualIn(unidadesVidas,game.at(3,14))
+	game.addVisualIn(contadorRosquillas,game.at(4,14))
+	game.addVisualIn(decenaRosquillas,game.at(5,14))
+	game.addVisualIn(unidadesRosquillas,game.at(6,14))
+	game.addVisualIn(contadorBombas,game.at(7,14))
+	game.addVisualIn(decenaBombas,game.at(8,14))
+	game.addVisualIn(unidadesBombas,game.at(9,14))
 	}
 }
 
@@ -81,7 +94,7 @@ object plantaNuclear {
 
 object tabernaMoe {
 
-	var position = game.at(12, 13)
+	var position = game.at(12,13)
 
 	method image() = "tabernaMoe.jpg"
 
@@ -97,13 +110,27 @@ object burns {
 	
 	//var direccion = moverIzq
 	
+	const direcciones = [izquierda,derecha,arriba,abajo]
+	
 	var property direccion = izquierda
 	
-	var property position = game.at(9,13)
-		
-	method patrulla() {movimientos.move(direccion,self)}
+	var property position = game.at(6,6)
 	
-	method image() =  if (self.direccion()== izquierda) "burns-izq.png" else "burns-der.png"
+	method direcciones(num) {
+		return direcciones.get(num)
+	}
+	
+	//method patrulla() {movimientos.move(direccion,self)}
+	
+	method cambiarDireccion() {
+		direccion = direcciones.get(0.randomUpTo(3))
+	}
+	
+	method patrulla() {
+		movimientos.move(direccion,self)
+	}
+	
+	method image() =  if (self.direccion() == izquierda) "burns-izq.png" else "burns-der.png"
 	
 	method nosCruzamos(quien) {quien.encontrarBurns()}
 	
@@ -140,7 +167,6 @@ object bart {
 	method explotoUnaBomba() {
 		game.removeTickEvent("Bart dispara")
 		game.removeVisual(self)
-		
 	}
 	
 	method nosCruzamos(quien) {}
@@ -148,7 +174,7 @@ object bart {
 	method disparar() {
 		var piedra = new Piedra(position = self.position())
 		game.addVisual(piedra)
-		game.whenCollideDo(piedra, {elemento=>elemento.nosCruzamos(piedra)})
+		game.onCollideDo(piedra, {elemento=>elemento.nosCruzamos(piedra)})
 		piedra.serDisparada()
 		game.onTick(5000,"Fuerapiedra",{=>piedra.chocarPared()})
 	}

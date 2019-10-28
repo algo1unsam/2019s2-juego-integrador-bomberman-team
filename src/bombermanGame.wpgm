@@ -4,11 +4,11 @@ import niveles.*
 import movimientos.*
 import paredes.*
 import otrosObjetos.*
+import contadores.*
 
 program BombermanGame {
 
 //	CONFIG	
-
 
 	game.title("Bomberman Springfield")
 	game.height(15)
@@ -16,6 +16,8 @@ program BombermanGame {
 	game.ground("bg_green.png")
 
 	nivel1.configuracion()
+	tablero.contadores()
+	
 	
 //	TECLADO
 	keyboard.space().onPressDo {bomberman.colocarBomba()}
@@ -28,9 +30,8 @@ program BombermanGame {
 //  VISUAL
 
 	game.whenCollideDo(bomberman,{elemento=>elemento.nosCruzamos(bomberman)})
-	game.whenCollideDo(burns,{elemento=>elemento.nosCruzamos(burns)})
-	
-	
+	game.onCollideDo(burns,{elemento=>elemento.nosCruzamos(burns)})
+		
 //	START
 	game.start()
 
