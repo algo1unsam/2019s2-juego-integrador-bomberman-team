@@ -1,4 +1,4 @@
-import bomberman.*
+import personajes.*
 import wollok.game.*
 import movimientos.*
 import niveles.*
@@ -82,6 +82,8 @@ object paredesNivel1 {
 		(1 .. ancho-2).forEach { z => moldeadoParedes.draw(new HardPared(),new Position(x=2, y=z*2)) }
 		(1 .. ancho-2).forEach { z => moldeadoParedes.draw(new HardPared(),new Position(x=4, y=z*2)) }
 		(1 .. ancho-2).forEach { z => moldeadoParedes.draw(new HardPared(),new Position(x=6, y=z*2)) }
+		
+		(0 .. 5).forEach { z => moldeadoParedes.draw(new HardPared(),new Position(x=z, y=2)) }
 
 	}
 	

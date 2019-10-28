@@ -1,4 +1,4 @@
-import bomberman.*
+import personajes.*
 import wollok.game.*
 import movimientos.*
 import paredes.*
@@ -40,10 +40,10 @@ object nivel1 {
 	method personajes(){
 		
 		game.addVisual(bomberman)
-		game.addVisual(tabernaMoe)	
-		game.addVisual(plantaNuclear)
+		game.addVisualIn(tabernaMoe,game.at(12,13))	
+		game.addVisualIn(plantaNuclear,game.at(10,3))
 		game.addVisual(burns)
-		game.addVisual(bart)
+		game.addVisualIn(bart,game.at(13,13))
 		
 	}
 }

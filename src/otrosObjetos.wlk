@@ -3,7 +3,7 @@ import paredes.*
 import niveles.*
 import bombas.*
 import movimientos.*
-import bomberman.*
+import personajes.*
 import contadores.*
 
 object tablero {
@@ -66,7 +66,7 @@ class Rosquilla {
 object plantaNuclear {
 	
 	var bombas = 5
-	var property position = game.at(10,3)
+	var property position
 	
 	method image() = "plantaNuclear.jpg"
 	
@@ -94,11 +94,9 @@ object plantaNuclear {
 
 object tabernaMoe {
 
-	var position = game.at(12,13)
 
 	method image() = "tabernaMoe.jpg"
 
-	method position() {return position}
 
 	method explotoUnaBomba() {game.say(self,"No destruyas mi taberna!")}
 
@@ -106,79 +104,7 @@ object tabernaMoe {
 
 } //Fin tabernaMoe
 
-object burns {
-	
-	//var direccion = moverIzq
-	
-	const direcciones = [izquierda,derecha,arriba,abajo]
-	
-	var property direccion = izquierda
-	
-	var property position = game.at(6,6)
-	
-	method direcciones(num) {
-		return direcciones.get(num)
-	}
-	
-	//method patrulla() {movimientos.move(direccion,self)}
-	
-	method cambiarDireccion() {
-		direccion = direcciones.get(0.randomUpTo(3))
-	}
-	
-	method patrulla() {
-		movimientos.move(direccion,self)
-	}
-	
-	method image() =  if (self.direccion() == izquierda) "burns-izq.png" else "burns-der.png"
-	
-	method nosCruzamos(quien) {quien.encontrarBurns()}
-	
-	//method direccionIzq(){return direccion==moverIzq}
-	
-	//method cambioDir(){if (self.direccionIzq()) direccion = moverDer else direccion = moverIzq}
-	
-	method golpeadoPorPiedra() {game.say(self,"Smithers! Estoy siendo atacado!")}
-		
-	method explotoUnaBomba() {
-		game.say(self,"Intenta matarme? Está despedido!")
-		bomberman.perderVida()
-	}
-	
-	method encontrarRosquilla() {}
-	
-	method chocarPared() {
-		movimientos.rebotar(self,direccion)
-		direccion = direccion.rebote()
-	}
-	
-	method encontrarBart() {}
-	method llegarATaberna() {game.say(tabernaMoe, "Largo de aquí!")}
-	method llegarAPlantaNuclear() {}
 
-} //Fin burns
-
-object bart {
-	
-	var property position = game.at(13,13)
-	
-	method image() = "bart.jpg"
-	
-	method explotoUnaBomba() {
-		game.removeTickEvent("Bart dispara")
-		game.removeVisual(self)
-	}
-	
-	method nosCruzamos(quien) {}
-	
-	method disparar() {
-		var piedra = new Piedra(position = self.position())
-		game.addVisual(piedra)
-		game.onCollideDo(piedra, {elemento=>elemento.nosCruzamos(piedra)})
-		piedra.serDisparada()
-		game.onTick(5000,"Fuerapiedra",{=>piedra.chocarPared()})
-	}
-}
 
 class Piedra {
 	

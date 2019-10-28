@@ -1,4 +1,4 @@
-import bomberman.*
+import personajes.*
 import wollok.game.*
 import niveles.*
 import movimientos.*
@@ -30,7 +30,7 @@ program BombermanGame {
 //  VISUAL
 
 	game.whenCollideDo(bomberman,{elemento=>elemento.nosCruzamos(bomberman)})
-	game.onCollideDo(burns,{elemento=>elemento.nosCruzamos(burns)})
+	game.whenCollideDo(burns,{elemento=>elemento.nosCruzamos(burns)})
 		
 //	START
 	game.start()

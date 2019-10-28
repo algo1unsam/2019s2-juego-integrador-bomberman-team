@@ -19,7 +19,7 @@ import paredes.*
  */
 object bomberman {
 
-	var property position = game.at(1, 1)
+	var property position = game.at(1,1)
 	var property vidas = 3
 	var property rosquillas = 0
 	var property bombas = 10
@@ -108,3 +108,78 @@ object bomberman {
 	}
 
 } //Fin bomberman
+
+object burns {
+	
+	//var direccion = moverIzq
+	
+	var property position = game.at(7,13)
+	
+	const direcciones = [izquierda,derecha,arriba,abajo]
+	
+	var property direccion = izquierda
+	
+	
+	method direcciones(num) {
+		return direcciones.get(num)
+	}
+	
+	//method patrulla() {movimientos.move(direccion,self)}
+	
+	method cambiarDireccion() {
+		direccion = direcciones.get(0.randomUpTo(3))
+	}
+	
+	method patrulla() {
+		movimientos.move(direccion,self)
+	}
+	
+	method image() =  if (self.direccion() == izquierda) "burns-izq.png" else "burns-der.png"
+	
+	method nosCruzamos(quien) {quien.encontrarBurns()}
+	
+	//method direccionIzq(){return direccion==moverIzq}
+	
+	//method cambioDir(){if (self.direccionIzq()) direccion = moverDer else direccion = moverIzq}
+	
+	method golpeadoPorPiedra() {game.say(self,"Smithers! Estoy siendo atacado!")}
+		
+	method explotoUnaBomba() {
+		game.say(self,"Intenta matarme? Está despedido!")
+		bomberman.perderVida()
+	}
+	
+	method encontrarRosquilla() {}
+	
+	method chocarPared() {
+		movimientos.rebotar(self,direccion)
+		direccion = direccion.rebote()
+	}
+	
+	method encontrarBart() {}
+	method llegarATaberna() {game.say(tabernaMoe, "Largo de aquí!")}
+	method llegarAPlantaNuclear() {}
+
+} //Fin burns
+
+object bart {
+	
+	var property position
+	
+	method image() = "bart.jpg"
+	
+	method explotoUnaBomba() {
+		game.removeTickEvent("Bart dispara")
+		game.removeVisual(self)
+	}
+	
+	method nosCruzamos(quien) {}
+	
+	method disparar() {
+		var piedra = new Piedra(position = self.position())
+		game.addVisual(piedra)
+		game.whenCollideDo(piedra, {elemento=>elemento.nosCruzamos(piedra)})
+		piedra.serDisparada()
+		game.onTick(5000,"Fuerapiedra",{=>piedra.chocarPared()})
+	}
+}

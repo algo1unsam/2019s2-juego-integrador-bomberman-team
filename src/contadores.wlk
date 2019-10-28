@@ -1,6 +1,6 @@
 import paredes.*
 import wollok.game.*
-import bomberman.*
+import personajes.*
 
 class Contador inherits HardPared {
 	
@@ -22,13 +22,13 @@ object contadorBombas inherits Contador {
 class Numero inherits HardPared {
 	override method nosCruzamos(quien) {}
 	
-	method vidasBomberman0a9() = return bomberman.vidas().between(0,9)
-	method rosqBomberman0a9() = return bomberman.rosquillas().between(0,9)
-	method bombasBomberman0a9() = return bomberman.bombas().between(0,9)
+	method vidasBomberman0a9() =  bomberman.vidas().between(0,9)
+	method rosqBomberman0a9() =  bomberman.rosquillas().between(0,9)
+	method bombasBomberman0a9() =  bomberman.bombas().between(0,9)
 	
-	method vidasString() = return bomberman.vidas().toString()
-	method rosqString() = return bomberman.rosquillas().toString()
-	method bombString() = return bomberman.bombas().toString()
+	method vidasString() =  bomberman.vidas().toString()
+	method rosqString() =  bomberman.rosquillas().toString()
+	method bombString() =  bomberman.bombas().toString()
 	
 	method subString(algo,num1,num2) {return algo.substring(num1,num2)}
 }

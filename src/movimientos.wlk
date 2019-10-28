@@ -1,4 +1,4 @@
-import bomberman.*
+import personajes.*
 import wollok.game.*
 import niveles.*
 import bombas.*
