@@ -34,15 +34,15 @@ object tablero {
 	}
 	
 	method contadores() {
-	game.addVisualIn(contadorVidas,game.at(1,14))
-	game.addVisualIn(decenaVidas,game.at(2,14))
-	game.addVisualIn(unidadesVidas,game.at(3,14))
-	game.addVisualIn(contadorRosquillas,game.at(4,14))
-	game.addVisualIn(decenaRosquillas,game.at(5,14))
-	game.addVisualIn(unidadesRosquillas,game.at(6,14))
-	game.addVisualIn(contadorBombas,game.at(7,14))
-	game.addVisualIn(decenaBombas,game.at(8,14))
-	game.addVisualIn(unidadesBombas,game.at(9,14))
+		game.addVisualIn(contadorVidas,game.at(1,14))
+		game.addVisualIn(decenaVidas,game.at(2,14))
+		game.addVisualIn(unidadesVidas,game.at(3,14))
+		game.addVisualIn(contadorRosquillas,game.at(4,14))
+		game.addVisualIn(decenaRosquillas,game.at(5,14))
+		game.addVisualIn(unidadesRosquillas,game.at(6,14))
+		game.addVisualIn(contadorBombas,game.at(7,14))
+		game.addVisualIn(decenaBombas,game.at(8,14))
+		game.addVisualIn(unidadesBombas,game.at(9,14))
 	}
 }
 

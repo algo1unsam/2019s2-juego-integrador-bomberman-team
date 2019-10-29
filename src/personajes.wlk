@@ -52,10 +52,6 @@ object bomberman {
 		bombas = bombas + cantBombas
 	}
 	
-	method sumarBombas() {
-		if (bombas < 3) bombas = bombas + 1
-	}
-
 	method colocarBomba() {
 		if (bombas == 0) {
 			game.say(self, "No tengo bombas!")
@@ -92,13 +88,13 @@ object bomberman {
 	}
 
 	method llegarATaberna() {
-		game.clear()
+		game.say(tabernaMoe,"Llegaste! Toma una Duff! ")
+		game.schedule(2000,{game.clear()})
 		// iniciamos nivel 2
 	}
 
 	method llegarAPlantaNuclear() {
 		self.sumarBombas(plantaNuclear.cuantasBombasHay())
-		self.sumarBombas()
 		plantaNuclear.restarBombas()
 	}
 
@@ -113,12 +109,11 @@ object burns {
 	
 	//var direccion = moverIzq
 	
-	var property position = game.at(7,13)
+	var property position = game.at(6,13)
 	
 	const direcciones = [izquierda,derecha,arriba,abajo]
 	
 	var property direccion = izquierda
-	
 	
 	method direcciones(num) {
 		return direcciones.get(num)
@@ -137,10 +132,6 @@ object burns {
 	method image() =  if (self.direccion() == izquierda) "burns-izq.png" else "burns-der.png"
 	
 	method nosCruzamos(quien) {quien.encontrarBurns()}
-	
-	//method direccionIzq(){return direccion==moverIzq}
-	
-	//method cambioDir(){if (self.direccionIzq()) direccion = moverDer else direccion = moverIzq}
 	
 	method golpeadoPorPiedra() {game.say(self,"Smithers! Estoy siendo atacado!")}
 		
