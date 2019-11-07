@@ -9,23 +9,46 @@ import contadores.*
 import clasegeneral.*
 
 
-object nivel1 {
-
+class Nivel{
+	
+	method final() = false
+	
+	method iniciar(){
+		game.schedule(1000, { self.configuracion()}) 
+		}
+		
+	method keyboard(){
+	keyboard.space().onPressDo {bomberman.colocarBomba()}
+	keyboard.v().onPressDo{game.say(bomberman,"Me quedan " + bomberman.vidas().toString() + " vidas, baboso.")}
+	keyboard.b().onPressDo{game.say(bomberman,"Me quedan " + bomberman.bombas().toString() + " bombas, baboso.")}
+	keyboard.b().onPressDo{game.say(plantaNuclear,"Me quedan " + plantaNuclear.cuantasBombasHay().toString() + " bombas, baboso.")}
+	}
+	
 	method configuracion() {
-
-		game.title("Bomberman Springfield")
-		game.height(15)
-		game.width(15)
-		game.ground("bg_green.png")
 		
 		movimientos.movimiento(bomberman)
-		paredesNivel1.paredesNivelUno()
 		paredesLimites.construirLimites()
-		
-		//Se agregan los personajes
 
 		self.personajes()
+		self.keyboard()
+		game.schedule(1000,{tablero.contadores()})
+		}
+	
+	method personajes(){}
+	
+}
 
+
+object nivel1 inherits Nivel {
+	
+	override method configuracion() {
+		
+		super()
+		
+		paredesNivel1.paredesNivelUno()
+		
+		game.whenCollideDo(bomberman,{elemento=>elemento.nosCruzamos(bomberman)})
+		game.whenCollideDo(burns,{elemento=>elemento.nosCruzamos(burns)})
 		game.onTick(15000,"Sumar bombas a la planta",{plantaNuclear.fabricarBombas()})
 		game.onTick(400,"Patrulla Burns",{burns.patrulla()})
 		//game.onTick(6333,"Cambio de dirección Burns",{burns.cambiarDireccion()})
@@ -38,10 +61,34 @@ object nivel1 {
 
 		}
 
-	method personajes(){
+	override method personajes(){
 		
 		game.addVisual(bomberman)
 		game.addVisualIn(tabernaMoe,game.at(12,13))	
+		game.addVisualIn(plantaNuclear,game.at(10,3))
+		game.addVisual(burns)
+		game.addVisualIn(bart,game.at(13,13))
+		
+	}
+}
+
+
+object nivel2 inherits Nivel{
+	
+	override method final() = true
+	
+	override method configuracion() {
+		super()
+		paredesNivel2.paredesNivelDos()
+		
+		
+
+		}
+
+	override method personajes(){
+		
+		game.addVisual(bomberman)
+		game.addVisualIn(tabernaMoe,game.at(1,2))
 		game.addVisualIn(plantaNuclear,game.at(10,3))
 		game.addVisual(burns)
 		game.addVisualIn(bart,game.at(13,13))

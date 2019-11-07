@@ -4,6 +4,7 @@ import otrosObjetos.*
 import movimientos.*
 import paredes.*
 import clasegeneral.*
+import niveles.*
 
 /*  METODOS COMUNES
  * 	
@@ -26,6 +27,7 @@ object bomberman inherits General {
 	var property bombas = 10
 	var property imagen = "homero-der.png"
 	var property direccion = derecha
+	var property nivel = nivel1
 
 	method image() = imagen
 
@@ -91,9 +93,18 @@ object bomberman inherits General {
 	}
 
 	method llegarATaberna() {
-		game.say(tabernaMoe, "Llegaste! Toma una Duff! ")
-		game.schedule(2000, { game.clear()})
-	// iniciamos nivel 2
+		
+		
+		if(nivel.final()){
+			game.say(tabernaMoe, "Estas muy borracho! Ya no hay mas cerveza para ti ")
+			game.schedule(2000, {game.stop()})
+			}
+				 else{			
+				nivel = nivel2
+				game.say(tabernaMoe, "Llegaste! Toma una Duff! ")
+				game.schedule(2000, { game.clear(); nivel2.iniciar()})
+		}
+
 	}
 
 	method llegarAPlantaNuclear() {
