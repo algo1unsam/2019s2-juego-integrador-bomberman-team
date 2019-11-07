@@ -1,6 +1,7 @@
 import paredes.*
 import wollok.game.*
 import personajes.*
+import clasegeneral.*
 
 class Contador inherits HardPared {
 	

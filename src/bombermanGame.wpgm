@@ -5,6 +5,7 @@ import movimientos.*
 import paredes.*
 import otrosObjetos.*
 import contadores.*
+import clasegeneral.*
 
 program BombermanGame {
 
@@ -31,6 +32,7 @@ program BombermanGame {
 
 	game.whenCollideDo(bomberman,{elemento=>elemento.nosCruzamos(bomberman)})
 	game.whenCollideDo(burns,{elemento=>elemento.nosCruzamos(burns)})
+	
 		
 //	START
 	game.start()

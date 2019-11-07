@@ -6,6 +6,7 @@ import otrosObjetos.*
 import bombas.*
 import paredes.*
 import contadores.*
+import clasegeneral.*
 
 
 object nivel1 {
@@ -29,7 +30,7 @@ object nivel1 {
 		game.onTick(400,"Patrulla Burns",{burns.patrulla()})
 		//game.onTick(6333,"Cambio de dirección Burns",{burns.cambiarDireccion()})
 		//game.onTick(20000,"Agregar rosquilla",{tablero.agregarRosquilla()})
-		//game.onTick(1000,"Bart dispara",{bart.disparar()})
+		//game.onTick(2000,"Bart dispara",{bart.disparar()})
 		//game.onTick(15314,"Agregar pared",{tablero.agregarPared()})
 		//game.onTick(20314,"Agregar pared",{tablero.agregarHardPared()})
 		
