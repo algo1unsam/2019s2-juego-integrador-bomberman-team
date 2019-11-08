@@ -17,10 +17,12 @@ program BombermanGame {
 	game.ground("bg_green.png")
 	
 	
-	inicio.configuracion()
+	nivel1.configuracion()
 	
 	
 //	START
 	game.start()
 
+
+	
 } //Fin bombermanGame

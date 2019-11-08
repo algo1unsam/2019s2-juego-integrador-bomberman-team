@@ -19,6 +19,7 @@ import niveles.*
  * 	method llegarATaberna() ****Para personajes que se mueven****
  * 	method encontrarRosquilla() ****Para personajes que se mueven****
  */
+ 
 object bomberman inherits General {
 
 	var property position = game.at(1, 1)
@@ -26,7 +27,7 @@ object bomberman inherits General {
 	var property rosquillas = 0
 	var property bombas = 10
 	var property imagen = "homero-der.png"
-	var property direccion = derecha
+	var property direccion 
 	var property nivel = nivel1
 
 	method image() = imagen
@@ -39,10 +40,20 @@ object bomberman inherits General {
 		self.perderVida()
 		self.cuantasVidas()
 	}
-
+	
+	method reiniciarContador(){
+		vidas = 3
+		rosquillas = 0
+		bombas = 10
+	}
+	
 	method perderVida() {
-		vidas = vidas - 1
+			vidas = vidas - 1
 		position = game.at(1, 1)
+			if(vidas == 0) {
+			game.say(self, "No me quedan mas vidas, perdiste!")
+			game.schedule(1000, { game.clear(); nivel1.iniciar()})
+		}
 	}
 
 	method perderTodasLasVidas() {
@@ -65,7 +76,7 @@ object bomberman inherits General {
 		}
 	}
 
-	method encontrarRosquilla() {
+	override method encontrarRosquilla() {
 		rosquillas = rosquillas + 1
 		self.vidaExtraPorRosquillas()
 	}
@@ -82,7 +93,7 @@ object bomberman inherits General {
 		movimientos.rebotar(self, direccion)
 	}
 
-	method encontrarBart() {
+	override method encontrarBart() {
 		game.say(self, "D'oh! Pequeño demonio!")
 		self.perderVida()
 	}
@@ -91,23 +102,37 @@ object bomberman inherits General {
 		game.say(burns, "Vaya a trabajar!")
 		self.perderVida()
 	}
+	
+	method encontrarBarney() {
+		game.say(barney, "Traeme otra cerveza!")
+		self.perderVida()
+	}
 
-	method llegarATaberna() {
-		
-		
-		if(nivel.final()){
-			game.say(tabernaMoe, "Estas muy borracho! Ya no hay mas cerveza para ti ")
+	override method llegarATaberna() {
+		if( self.rosquillas()==6){
+			self.finalJuego()
+		}
+		else{
+			game.say(self, "Traeme mas rosquillas!")
+		}
+
+
+	}
+	
+	method finalJuego(){
+				if(nivel.final()){
+			game.say(tabernaMoe, "Ya te emborrachaste mucho! No tenemos mas cervezas")
 			game.schedule(2000, {game.stop()})
 			}
 				 else{			
 				nivel = nivel2
 				game.say(tabernaMoe, "Llegaste! Toma una Duff! ")
+				game.sound("song093.wav")
 				game.schedule(2000, { game.clear(); nivel2.iniciar()})
 		}
-
 	}
 
-	method llegarAPlantaNuclear() {
+	override method llegarAPlantaNuclear() {
 		self.sumarBombas(plantaNuclear.cuantasBombasHay())
 		plantaNuclear.restarBombas()
 	}
@@ -131,6 +156,7 @@ object burns inherits General {
 	}
 
 	// method patrulla() {movimientos.move(direccion,self)}
+	
 	method cambiarDireccion() {
 		direccion = direcciones.get(0.randomUpTo(3))
 	}
@@ -139,45 +165,36 @@ object burns inherits General {
 		movimientos.move(direccion, self)
 	}
 
-	method image() = if (direccion.soyIzquierda()) "burns-izq.png" else "burns-der.png"
-
-	override method nosCruzamos(quien) {
+	method image() = if (direccion.soyIzquierda()) "burns-izq.png" else "burns-der.png" 
+	
+	
+	override method nosCruzamosConBomberman(quien) {
 		quien.encontrarBurns()
 	}
 
-	override method golpeadoPorPiedra() {
-		game.say(self, "Smithers! Estoy siendo atacado!")
-	}
-
 	override method explotoUnaBomba() {
-		game.say(self, "Intenta matarme? Está despedido!")
-		bomberman.perderVida()
+		game.removeTickEvent("Patrulla Burns")
+		game.removeVisual(self)
 	}
 
-	method encontrarRosquilla() {
-	}
+
 
 	method chocarPared() {
 		movimientos.rebotar(self, direccion)
 		direccion = direccion.rebote()
 	}
 
-	method encontrarBart() {
-	}
 
-	method llegarATaberna() {
-		game.say(tabernaMoe, "Largo de aquí!")
-	}
 
-	method llegarAPlantaNuclear() {
-	}
+
 
 } //Fin burns
 
 object bart inherits General {
 
 	var property position
-
+	
+	
 	method image() = "bart.jpg"
 
 	override method explotoUnaBomba() {
@@ -186,10 +203,42 @@ object bart inherits General {
 	}
 
 	method disparar() {
-		var piedra = new Piedra(position = self.position())
+		var piedra = new Proyectil(position = self.position())
+		
 		game.addVisual(piedra)
-		game.whenCollideDo(piedra, {elemento=>elemento.nosCruzamos(piedra)})
+		game.whenCollideDo(piedra, {elemento=>elemento.nosCruzamosConProyectil(piedra)})
+		
 		piedra.serDisparada()
+		game.schedule(1400,{game.removeVisual(piedra)})
+	}
+	
+	override method nosCruzamosConBomberman(quien) {
+		quien.encontrarBart()
+	}
+	
+
+}
+
+object barney inherits General {
+
+	var property position
+
+	method image() = "barney.png"
+
+	override method explotoUnaBomba() {
+		//game.removeTickEvent("Barney dispara")
+		game.removeVisual(self)
+	}
+	
+	override method nosCruzamosConBomberman(quien) {
+		quien.encontrarBarney()
+	}
+
+	method disparar() {
+		var cerveza = new Proyectil(position = self.position())
+		game.addVisual(cerveza)
+		game.whenCollideDo(cerveza, {elemento=>elemento.nosCruzamosConEnemigo(cerveza)})
+		cerveza.serDisparada()
 		//game.onTick(5000, "Fuerapiedra", {=> piedra.chocarPared()})
 	}
 

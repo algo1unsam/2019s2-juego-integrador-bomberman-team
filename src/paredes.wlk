@@ -13,9 +13,14 @@ class Pared inherits General {
 
 	method image() = imagenPared
 
-	override method nosCruzamos(quien) {
+	override method nosCruzamosConBomberman(quien) {
 		quien.chocarPared()
 	}
+	
+		override method nosCruzamosConEnemigo(quien) {
+		quien.chocarPared()
+	}
+	
 
 	override method explotoUnaBomba() {
 		imagenPared = "explosion1.jpg"
@@ -26,6 +31,9 @@ class Pared inherits General {
 		game.removeVisual(self)
 		game.removeTickEvent("Explosion" + self.toString())
 	}
+	
+
+	
 
 }
 
@@ -35,6 +43,7 @@ class HardPared inherits Pared {
 
 	override method explotoUnaBomba() {
 	}
+	
 
 } //Fin HardPared
 
@@ -72,15 +81,20 @@ object paredesNivel1 {
 		(2 .. ancho - 1).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 11, y = z))}
 		(1 .. ancho - 2).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 8, y = z))}
 		(1 .. ancho - 2).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 9, y = z))}
+			
 			// resto
-		(1 .. 5).forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = 1, y = (z * 2) + 1))}
-		(1 .. 5).forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = 3, y = (z * 2) + 1))}
-		(1 .. 5).forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = 5, y = (z * 2) + 1))}
-		(1 .. 5).forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = 7, y = (z * 2) + 1))}
-		(1 .. ancho - 2).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 2, y = z * 2))}
-		(1 .. ancho - 2).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 4, y = z * 2))}
-		(1 .. ancho - 2).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 6, y = z * 2))}
-		(0 .. 5).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = z, y = 2))}
+		
+		[4].forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = z, y = 3))}
+		[1,2,3,5,6,7].forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = z, y = 3))}
+		[1,3,5,7].forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = z, y = 5))}
+		[1,3,5,7].forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = z, y = 7))}
+		[1,7].forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = z, y = 8))}
+		[2,6].forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = z, y = 9))}
+		[1,3,5,7].forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = z, y = 9))}
+		[1,2,5,6,7].forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = z, y = 12))}
+		[3].forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = z, y = 13))}
+		
+		[5].forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = 13, y = z))}
 	}
 
 } //Fin paredesNivel1

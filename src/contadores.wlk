@@ -5,7 +5,10 @@ import clasegeneral.*
 
 class Contador inherits HardPared {
 	
-	override method nosCruzamos(quien) {}
+	override method nosCruzamosConBomberman(quien) {}
+	override method nosCruzamosConEnemigo(quien) {}
+	override method nosCruzamosConProyectil(quien) {}
+	
 }
 
 object contadorVidas inherits Contador {
@@ -20,8 +23,7 @@ object contadorBombas inherits Contador {
 	override method image() = "HardBlockBombas.png"
 }
 
-class Numero inherits HardPared {
-	override method nosCruzamos(quien) {}
+class Numero inherits Contador {
 	
 	method vidasBomberman0a9() =  bomberman.vidas().between(0,9)
 	method rosqBomberman0a9() =  bomberman.rosquillas().between(0,9)

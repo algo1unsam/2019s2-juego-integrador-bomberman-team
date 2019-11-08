@@ -8,18 +8,11 @@ import paredes.*
 object movimientos {
 
 	method movimiento(personaje) {
-		keyboard.left().onPressDo{ self.move(izquierda, personaje)}
-		keyboard.right().onPressDo{ self.move(derecha, personaje)}
-		keyboard.up().onPressDo{ self.move(arriba, personaje)}
-		keyboard.down().onPressDo{ self.move(abajo, personaje)}
-		keyboard.left().onPressDo{ bomberman.direccion(izquierda)
-		;bomberman.imagen("homero-izq.png")
-		}
-		keyboard.right().onPressDo{ bomberman.direccion(derecha)
-		;bomberman.imagen("homero-der.png")
-		}
-		keyboard.up().onPressDo{ bomberman.direccion(arriba)}
-		keyboard.down().onPressDo{ bomberman.direccion(abajo)}
+		keyboard.left().onPressDo{ self.move(izquierda, personaje);bomberman.direccion(izquierda);bomberman.imagen("homero-izq.png")	}
+		keyboard.right().onPressDo{ self.move(derecha, personaje);bomberman.direccion(derecha);bomberman.imagen("homero-der.png")}
+		keyboard.up().onPressDo{ self.move(arriba, personaje); bomberman.direccion(arriba)}
+		keyboard.down().onPressDo{ self.move(abajo, personaje);bomberman.direccion(abajo)}
+		
 	}
 
 	method move(sentido, personaje) {
@@ -58,7 +51,7 @@ object abajo {
 
 	method rebote() = arriba
 
-	method soyIzquierda() = false
+	method soyIzquierda(){}
 
 }
 
@@ -68,7 +61,7 @@ object arriba {
 
 	method rebote() = abajo
 
-	method soyIzquierda() = false
+	method soyIzquierda() {}
 
 }
 

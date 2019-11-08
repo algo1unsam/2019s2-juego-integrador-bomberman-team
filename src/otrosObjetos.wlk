@@ -14,7 +14,7 @@ import clasegeneral.*
 	var comenzar = game.at(3,7)
 	var salir = game.at(3,6)
 	
-	method image() = "rosquilla.jpg"
+	method image() = "rosquilla.png"
 	
 	method arriba(){if (salir == position) self.move(arriba,self)}
 	
@@ -24,7 +24,7 @@ import clasegeneral.*
 	
 	method comenzarJuego(){
 		if (position == comenzar) {
-			game.schedule(2000, { game.clear(); nivel1.iniciar()})
+			game.schedule(0, { game.clear(); nivel1.iniciar()})
 			}
 		 else game.stop()
 	}
@@ -83,9 +83,9 @@ class Rosquilla inherits General {
 
 	var property position
 
-	method image() = "rosquilla.jpg"
+	method image() = "rosquilla.png"
 
-	override method nosCruzamos(quien) {
+	override method nosCruzamosConBomberman(quien) {
 		quien.encontrarRosquilla()
 		game.removeVisual(self)
 	}
@@ -111,7 +111,7 @@ object plantaNuclear inherits General {
 		bomberman.cuantasVidas()
 	}
 
-	override method nosCruzamos(quien) {
+	override method nosCruzamosConBomberman(quien) {
 		quien.llegarAPlantaNuclear()
 	}
 
@@ -127,41 +127,39 @@ object tabernaMoe inherits General {
 
 	method image() = "tabernaMoe.jpg"
 
-	override method nosCruzamos(quien) {
+	override method nosCruzamosConBomberman(quien) {
 		quien.llegarATaberna()
 	}
 
 } //Fin tabernaMoe
 
-class Piedra inherits General {
+class Proyectil inherits General {
 
 	var property position
 
 	method image() = "piedra.jpg"
 
-	override method nosCruzamos(quien) {
+	override method nosCruzamosConBomberman(quien) {
 		quien.golpeadoPorPiedra()
 		game.removeVisual(self)
-		game.removeTickEvent("Tirapiedra")
+		game.removeTickEvent("Lanzar")
 	}
 
-	method chocarConAlgo() {
-		game.whenCollideDo(self, { alguien => self.nosCruzamos(alguien)})
-	}
-
-	method chocarPared() {
-		game.removeTickEvent("Explota bomba" + self.identity())
-		game.removeVisual(self)
-		game.removeTickEvent("Tirapiedra")
-		game.removeTickEvent("Fuerapiedra")
-	}
 
 	method serDisparada() {
-		game.onTick(100, "Tirapiedra", {=> movimientos.move(abajo, self)})
+		game.onTick(100, "Lanzar", {=> movimientos.move(abajo, self)})
+
+	}
+	
+	
+	method chocarPared(){
+		game.removeVisual(self)
+		//game.removeTickEvent("Lanzar")
 	}
 
-	method encontrarRosquilla() {
-	}
 
 } //Fin piedra
 
+object nulo{
+	
+}

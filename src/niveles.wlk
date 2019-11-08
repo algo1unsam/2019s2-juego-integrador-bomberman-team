@@ -25,7 +25,7 @@ class Nivel{
 	}
 	
 	method configuracion() {
-		
+		bomberman.reiniciarContador()
 		movimientos.movimiento(bomberman)
 		paredesLimites.construirLimites()
 
@@ -67,27 +67,32 @@ object nivel1 inherits Nivel {
 		
 		paredesNivel1.paredesNivelUno()
 		
-		game.whenCollideDo(bomberman,{elemento=>elemento.nosCruzamos(bomberman)})
-		game.whenCollideDo(burns,{elemento=>elemento.nosCruzamos(burns)})
-		game.onTick(15000,"Sumar bombas a la planta",{plantaNuclear.fabricarBombas()})
+		game.whenCollideDo(bomberman,{elemento=>elemento.nosCruzamosConBomberman(bomberman)})
+		game.whenCollideDo(burns,{elemento=>elemento.nosCruzamosConEnemigo(burns)})
+		
+		
 		game.onTick(400,"Patrulla Burns",{burns.patrulla()})
-		//game.onTick(6333,"Cambio de dirección Burns",{burns.cambiarDireccion()})
-		//game.onTick(20000,"Agregar rosquilla",{tablero.agregarRosquilla()})
-		//game.onTick(2000,"Bart dispara",{bart.disparar()})
-		//game.onTick(15314,"Agregar pared",{tablero.agregarPared()})
-		//game.onTick(20314,"Agregar pared",{tablero.agregarHardPared()})
+		game.onTick(2000,"Bart dispara",{bart.disparar()})
 		
 		
 
 		}
 
 	override method personajes(){
-		
+	
 		game.addVisual(bomberman)
 		game.addVisualIn(tabernaMoe,game.at(12,13))	
 		game.addVisualIn(plantaNuclear,game.at(10,3))
 		game.addVisual(burns)
-		game.addVisualIn(bart,game.at(13,13))
+		game.addVisualIn(bart, game.at(13,13))
+		bart.position(game.at(13,13))
+		game.addVisualIn(barney,game.at(4,8))
+		game.addVisualIn(new Rosquilla(), game.at(2,8))
+		game.addVisualIn(new Rosquilla(), game.at(6,8))
+		game.addVisualIn(new Rosquilla(), game.at(4,10))
+		game.addVisualIn(new Rosquilla(), game.at(1,13))
+		game.addVisualIn(new Rosquilla(), game.at(12,5))
+		game.addVisualIn(new Rosquilla(), game.at(12,9))
 		
 	}
 }
@@ -100,13 +105,15 @@ object nivel2 inherits Nivel{
 	override method configuracion() {
 		super()
 		paredesNivel2.paredesNivelDos()
+		game.whenCollideDo(bomberman,{elemento=>elemento.nosCruzamosConBomberman(bomberman)})
+		game.whenCollideDo(burns,{elemento=>elemento.nosCruzamosConEnemigo(burns)})
 		
 		
 
 		}
 
 	override method personajes(){
-		
+		bomberman.position(game.at(1,1))
 		game.addVisual(bomberman)
 		game.addVisualIn(tabernaMoe,game.at(1,2))
 		game.addVisualIn(plantaNuclear,game.at(10,3))

@@ -46,6 +46,7 @@ class Bomba inherits General {
 		game.getObjectsIn(self.position().down(1)).forEach({ elemento => elemento.explotoUnaBomba()})
 		game.getObjectsIn(self.position().left(1)).forEach({ elemento => elemento.explotoUnaBomba()})
 		game.getObjectsIn(self.position().right(1)).forEach({ elemento => elemento.explotoUnaBomba()})
+		game.sound("song052.wav")
 		self.animacion()
 	}
 
