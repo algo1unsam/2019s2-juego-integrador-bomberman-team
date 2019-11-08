@@ -9,10 +9,10 @@ import clasegeneral.*
 
  object seleccionador {		//ES LA ROSQUITA DEL INICIO, SE LA CLAVE PARA PROBAR
 	 
-	var property position = game.at(3,7)
+	var property position = game.at(2,7)
 	
-	var comenzar = game.at(3,7)
-	var salir = game.at(3,6)
+	var comenzar = game.at(2,7)
+	var salir = game.at(2,6)
 	
 	method image() = "rosquilla.png"
 	
@@ -159,6 +159,12 @@ class Proyectil inherits General {
 
 
 } //Fin piedra
+
+class Vomito inherits General {
+
+	method image() = "vomito.png"
+
+}
 
 object nulo{
 	

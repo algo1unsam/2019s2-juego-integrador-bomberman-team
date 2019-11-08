@@ -72,7 +72,8 @@ object nivel1 inherits Nivel {
 		
 		
 		game.onTick(400,"Patrulla Burns",{burns.patrulla()})
-		game.onTick(2000,"Bart dispara",{bart.disparar()})
+		game.onTick(10000,"Bart dispara",{bart.disparar()})
+		game.onTick(2000,"Vomitar",{barney.vomitar()})
 		
 		
 
@@ -87,6 +88,7 @@ object nivel1 inherits Nivel {
 		game.addVisualIn(bart, game.at(13,13))
 		bart.position(game.at(13,13))
 		game.addVisualIn(barney,game.at(4,8))
+		barney.position(game.at(4,8))
 		game.addVisualIn(new Rosquilla(), game.at(2,8))
 		game.addVisualIn(new Rosquilla(), game.at(6,8))
 		game.addVisualIn(new Rosquilla(), game.at(4,10))

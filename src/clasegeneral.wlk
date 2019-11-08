@@ -20,7 +20,7 @@ class General {
 	
 	method llegarATaberna() {}
 
-	
+	method vomitado(){}
 	
 }
 

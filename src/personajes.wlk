@@ -25,7 +25,7 @@ object bomberman inherits General {
 	var property position = game.at(1, 1)
 	var property vidas = 3
 	var property rosquillas = 0
-	var property bombas = 10
+	var property bombas = 6
 	var property imagen = "homero-der.png"
 	var property direccion 
 	var property nivel = nivel1
@@ -105,6 +105,11 @@ object bomberman inherits General {
 	
 	method encontrarBarney() {
 		game.say(barney, "Traeme otra cerveza!")
+		self.perderVida()
+	}
+	
+		override method vomitado() {
+		game.say(self, "D'oh!")
 		self.perderVida()
 	}
 
@@ -226,7 +231,7 @@ object barney inherits General {
 	method image() = "barney.png"
 
 	override method explotoUnaBomba() {
-		//game.removeTickEvent("Barney dispara")
+		game.removeTickEvent("Vomitar")
 		game.removeVisual(self)
 	}
 	
@@ -234,13 +239,36 @@ object barney inherits General {
 		quien.encontrarBarney()
 	}
 
-	method disparar() {
-		var cerveza = new Proyectil(position = self.position())
-		game.addVisual(cerveza)
-		game.whenCollideDo(cerveza, {elemento=>elemento.nosCruzamosConEnemigo(cerveza)})
-		cerveza.serDisparada()
-		//game.onTick(5000, "Fuerapiedra", {=> piedra.chocarPared()})
-	}
 
+	
+	method vomitar(){
+		
+		game.getObjectsIn(self.position().up(1)).forEach({ elemento => elemento.vomitado()})
+		game.getObjectsIn(self.position().down(1)).forEach({ elemento => elemento.vomitado()})
+		game.getObjectsIn(self.position().left(1)).forEach({ elemento => elemento.vomitado()})
+		game.getObjectsIn(self.position().right(1)).forEach({ elemento => elemento.vomitado()})
+		
+		self.animacion()
+	}
+	
+		method animacion() {
+		var exp1 = new Vomito()
+		var exp2 = new Vomito()
+		var exp3 = new Vomito()
+		var exp4 = new Vomito()
+
+		var x = self.position().x()
+		var y = self.position().y()
+		const vomitos = #{ exp1, exp2, exp3, exp4 }
+		
+		game.addVisualIn(exp1, game.at(x + 1, y))
+		game.addVisualIn(exp2, game.at(x - 1, y))
+		game.addVisualIn(exp3, game.at(x, y + 1))
+		game.addVisualIn(exp4, game.at(x, y - 1))
+		game.schedule(500, { vomitos.forEach({ vomitos => game.removeVisual(vomitos)})})
+	}
+	
 }
+
+
 
