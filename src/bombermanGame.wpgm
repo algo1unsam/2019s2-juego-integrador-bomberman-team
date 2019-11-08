@@ -17,7 +17,7 @@ program BombermanGame {
 	game.ground("bg_green.png")
 	
 	
-	nivel1.configuracion()
+	inicio.configuracion()
 	
 	
 //	START

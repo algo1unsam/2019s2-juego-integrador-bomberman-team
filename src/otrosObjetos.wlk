@@ -7,6 +7,37 @@ import personajes.*
 import contadores.*
 import clasegeneral.*
 
+ object seleccionador {		//ES LA ROSQUITA DEL INICIO, SE LA CLAVE PARA PROBAR
+	 
+	var property position = game.at(3,7)
+	
+	var comenzar = game.at(3,7)
+	var salir = game.at(3,6)
+	
+	method image() = "rosquilla.jpg"
+	
+	method arriba(){if (salir == position) self.move(arriba,self)}
+	
+	method abajo(){if (comenzar == position)self.move(abajo,self)}
+	
+	method move(sentido, personaje) { personaje.position(sentido.hacia(personaje.position())) }
+	
+	method comenzarJuego(){
+		if (position == comenzar) {
+			game.schedule(2000, { game.clear(); nivel1.iniciar()})
+			}
+		 else game.stop()
+	}
+} 
+
+object fondo {
+	
+	var property position = game.at(0,0)
+	
+	method image() = "fondoInicio0.png"
+	
+}
+
 object tablero {
 
 	method posicionVacia(posicion) {

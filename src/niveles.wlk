@@ -38,6 +38,26 @@ class Nivel{
 	
 }
 
+object inicio inherits Nivel {	
+	
+	override method configuracion(){
+	
+		game.addVisual(fondo)
+		
+		game.addVisual(seleccionador)		
+		
+		self.keyboard()
+		}
+		
+		override method keyboard(){
+
+		keyboard.up().onPressDo {seleccionador.arriba()}
+		keyboard.down().onPressDo {seleccionador.abajo()}
+		keyboard.enter().onPressDo {seleccionador.comenzarJuego()} 
+		}
+	
+}
+
 
 object nivel1 inherits Nivel {
 	
