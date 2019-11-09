@@ -105,8 +105,18 @@ object paredesNivel2 {
 
 	method paredesNivelDos() {
 
-
-
+		(1 .. 5).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 3, y = z))}
+		(1 .. 5).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 7, y = z))}
+		(1 .. 5).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 11, y = z))}
+		(2 .. 6).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 5, y = z))}
+		(2 .. 6).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 9, y = z))}
+		(1 .. 12).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = z, y = 7))}
+		(8 .. 11).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 11, y = z))}
+		[2,3,5,9,11,13,14].forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 12, y = z))}
+		(11 .. 14).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 7, y = z))}
+		(4 .. 7).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = z, y = 10))}
+		
+		[4,8,12,13].forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = z, y = 2))}
 	}
 
 } //Fin paredesNivel2

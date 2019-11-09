@@ -48,12 +48,16 @@ object bomberman inherits General {
 	}
 	
 	method perderVida() {
+			
 			vidas = vidas - 1
-		position = game.at(1, 1)
+			position = game.at(1, 1)
 			if(vidas == 0) {
 			game.say(self, "No me quedan mas vidas, perdiste!")
 			game.schedule(1000, { game.clear(); nivel1.iniciar()})
+			
 		}
+		
+		game.sound("doh.wav")
 	}
 
 	method perderTodasLasVidas() {
@@ -243,28 +247,29 @@ object barney inherits General {
 	
 	method vomitar(){
 		
+	//	const direcciones = #{self.position().up(1),self.position().down(1),self.position().left(1),self.position().right(1)}
+		
 		game.getObjectsIn(self.position().up(1)).forEach({ elemento => elemento.vomitado()})
 		game.getObjectsIn(self.position().down(1)).forEach({ elemento => elemento.vomitado()})
 		game.getObjectsIn(self.position().left(1)).forEach({ elemento => elemento.vomitado()})
 		game.getObjectsIn(self.position().right(1)).forEach({ elemento => elemento.vomitado()})
-		
-		self.animacion()
+	
+			self.animacion()
 	}
 	
-		method animacion() {
+		method animacion() { 
 		var exp1 = new Vomito()
 		var exp2 = new Vomito()
 		var exp3 = new Vomito()
 		var exp4 = new Vomito()
 
-		var x = self.position().x()
-		var y = self.position().y()
 		const vomitos = #{ exp1, exp2, exp3, exp4 }
+	
+		game.addVisualIn(exp1, self.position().right(1))
+		game.addVisualIn(exp2, self.position().left(1))
+		game.addVisualIn(exp3, self.position().up(1))
+		game.addVisualIn(exp4, self.position().down(1))
 		
-		game.addVisualIn(exp1, game.at(x + 1, y))
-		game.addVisualIn(exp2, game.at(x - 1, y))
-		game.addVisualIn(exp3, game.at(x, y + 1))
-		game.addVisualIn(exp4, game.at(x, y - 1))
 		game.schedule(500, { vomitos.forEach({ vomitos => game.removeVisual(vomitos)})})
 	}
 	
