@@ -23,7 +23,7 @@ class Pared inherits General {
 	
 
 	override method explotoUnaBomba() {
-		imagenPared = "explosion1.jpg"
+		imagenPared = "explosion.png"
 		game.onTick(500, "Explosion" + self.toString(), { => self.removerExplosion()})
 	}
 
@@ -89,34 +89,40 @@ object paredesNivel1 {
 		[1,3,5,7].forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = z, y = 5))}
 		[1,3,5,7].forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = z, y = 7))}
 		[1,7].forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = z, y = 8))}
-		[2,6].forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = z, y = 9))}
-		[1,3,5,7].forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = z, y = 9))}
+		[1,2,3,5,6,7].forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = z, y = 9))}
 		[1,2,5,6,7].forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = z, y = 12))}
 		[3].forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = z, y = 13))}
 		
-		[5].forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = 13, y = z))}
+		[5,9].forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = 13, y = z))}
 	}
 
 } //Fin paredesNivel1
 
 object paredesNivel2 {
 
-	const ancho = game.width() - 1
-
 	method paredesNivelDos() {
-
-		(1 .. 5).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 3, y = z))}
-		(1 .. 5).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 7, y = z))}
-		(1 .. 5).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 11, y = z))}
-		(2 .. 6).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 5, y = z))}
-		(2 .. 6).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 9, y = z))}
-		(1 .. 12).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = z, y = 7))}
-		(8 .. 11).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 11, y = z))}
-		[2,3,5,9,11,13,14].forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 12, y = z))}
-		(11 .. 14).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 7, y = z))}
-		(4 .. 7).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = z, y = 10))}
+		[3,5,7,9,11,13].forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 12, y = z))}
+		[1,2,3,4,5,7,8,9,10,11].forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 11, y = z))}
 		
-		[4,8,12,13].forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = z, y = 2))}
+		[6,7,9,10].forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = z, y = 13))}
+		[6,7,9,10].forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = z, y = 12))}
+		[3,5,6,10].forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = z, y = 11))}
+		(3..11).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 2, y = z))}
+		[1,2,3,5,6,7].forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = z, y = 2))}
+		(1..3).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 8, y = z))}
+		(3..6).forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 7, y = z))}
+		[6,7,8,10].forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = 6, y = z))}
+		[3,5,9].forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = z, y = 7))}
+		[9,10].forEach{ z => moldeadoParedes.draw(new HardPared(), new Position(x = z, y = 5))}
+		moldeadoParedes.draw(new HardPared(), new Position(x = 9, y = 6))
+		
+		[4,12,13].forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = z, y = 2))}
+		[2,7,11].forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = 4, y = z))}
+		[4,12].forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = 8, y = z))}
+		moldeadoParedes.draw(new Pared(), new Position(x = 6, y = 9))
+		moldeadoParedes.draw(new Pared(), new Position(x = 1, y = 11))
+		[12,13].forEach{ z => moldeadoParedes.draw(new Pared(), new Position(x = z, y = 2))}
+		
 	}
 
 } //Fin paredesNivel2

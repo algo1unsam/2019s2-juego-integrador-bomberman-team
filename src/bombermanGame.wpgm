@@ -4,6 +4,7 @@ import niveles.*
 import movimientos.*
 import paredes.*
 import otrosObjetos.*
+
 import contadores.*
 import clasegeneral.*
 
@@ -17,12 +18,13 @@ program BombermanGame {
 	game.ground("bg_green.png")
 	
 	
-	inicio.configuracion()
 	
+	inicio.configuracion()
+
 	
 //	START
 	game.start()
-
+	
 
 	
 } //Fin bombermanGame

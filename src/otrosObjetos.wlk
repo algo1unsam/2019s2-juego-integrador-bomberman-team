@@ -7,7 +7,7 @@ import personajes.*
 import contadores.*
 import clasegeneral.*
 
- object seleccionador {		//ES LA ROSQUITA DEL INICIO, SE LA CLAVE PARA PROBAR
+ object seleccionador {		
 	 
 	var property position = game.at(2,7)
 	
@@ -24,7 +24,7 @@ import clasegeneral.*
 	
 	method comenzarJuego(){
 		if (position == comenzar) {
-			game.schedule(0, { game.clear(); nivel1.iniciar()})
+			game.schedule(0, { nivel1.iniciar()})
 			}
 		 else game.stop()
 	}
@@ -37,6 +37,24 @@ object fondo {
 	method image() = "fondoInicio0.png"
 	
 }
+
+object fondo2 {
+	
+	var property position = game.at(0,0)
+	
+	method image() = "fondo2.png"
+	
+}
+
+object fondo3 {
+	
+	var property position = game.at(0,0)
+	
+	method image() = "fondo3.png"
+	
+}
+
+
 
 object tablero {
 
@@ -96,7 +114,7 @@ object plantaNuclear inherits General {
 
 	var bombas = 5
 
-	method image() = "plantaNuclear.jpg"
+	method image() = "plantaNuclear.png"
 
 	method cuantasBombasHay() {
 		return bombas
@@ -116,10 +134,8 @@ object plantaNuclear inherits General {
 	}
 
 	method fabricarBombas() {
-		if (self.cuantasBombasHay() == 0) {
-			bombas = bombas + 1
+		bombas = 5
 		}
-	}
 
 } //Fin object planta nuclear
 
@@ -137,12 +153,10 @@ class Proyectil inherits General {
 
 	var property position
 
-	method image() = "piedra.jpg"
+	method image() = "piedra2.png"
 
 	override method nosCruzamosConBomberman(quien) {
 		quien.golpeadoPorPiedra()
-		game.removeVisual(self)
-		game.removeTickEvent("Lanzar")
 	}
 
 
@@ -166,6 +180,18 @@ class Vomito inherits General {
 
 }
 
-object nulo{
+object trigger inherits General{
+	var property position
 	
+	var property trigger = 0
+	
+	method image() = "transparencia.png"
+	
+	override method nosCruzamosConBomberman(quien){
+		if (trigger == 0){
+		game.onTick(2000,"Bart dispara",{bart.disparar()})
+		trigger++
+		}
+		
+	}
 }

@@ -42,22 +42,27 @@ object bomberman inherits General {
 	}
 	
 	method reiniciarContador(){
-		vidas = 3
 		rosquillas = 0
-		bombas = 10
+		bombas = 6
+	}
+	
+	method reiniciarVida(){
+		vidas = 3
 	}
 	
 	method perderVida() {
 			
 			vidas = vidas - 1
 			position = game.at(1, 1)
+	
+			
 			if(vidas == 0) {
 			game.say(self, "No me quedan mas vidas, perdiste!")
-			game.schedule(1000, { game.clear(); nivel1.iniciar()})
+			game.schedule(1000, { nivel1.iniciar() ; self.reiniciarVida(); nivel= nivel1})
 			
 		}
 		
-		game.sound("doh.wav")
+		
 	}
 
 	method perderTodasLasVidas() {
@@ -82,16 +87,8 @@ object bomberman inherits General {
 
 	override method encontrarRosquilla() {
 		rosquillas = rosquillas + 1
-		self.vidaExtraPorRosquillas()
 	}
 
-	method vidaExtraPorRosquillas() {
-		if (rosquillas == 10) {
-			vidas = vidas + 1
-			game.say(self, "Yajuu! Una vida extra! Tengo " + self.vidas().toString() + " vidas.")
-			rosquillas = 0
-		}
-	}
 
 	method chocarPared() {
 		movimientos.rebotar(self, direccion)
@@ -118,7 +115,7 @@ object bomberman inherits General {
 	}
 
 	override method llegarATaberna() {
-		if( self.rosquillas()==6){
+		if( self.rosquillas()>=6){
 			self.finalJuego()
 		}
 		else{
@@ -131,13 +128,17 @@ object bomberman inherits General {
 	method finalJuego(){
 				if(nivel.final()){
 			game.say(tabernaMoe, "Ya te emborrachaste mucho! No tenemos mas cervezas")
-			game.schedule(2000, {game.stop()})
+			game.schedule(2000, { creditos.configuracion()})
+			
 			}
 				 else{			
-				nivel = nivel2
 				game.say(tabernaMoe, "Llegaste! Toma una Duff! ")
+				plantaNuclear.fabricarBombas()
+				game.clear()
 				game.sound("song093.wav")
-				game.schedule(2000, { game.clear(); nivel2.iniciar()})
+				game.addVisual(fondo2)
+				game.schedule(2000, { nivel2.iniciar()})
+			
 		}
 	}
 
@@ -247,7 +248,6 @@ object barney inherits General {
 	
 	method vomitar(){
 		
-	//	const direcciones = #{self.position().up(1),self.position().down(1),self.position().left(1),self.position().right(1)}
 		
 		game.getObjectsIn(self.position().up(1)).forEach({ elemento => elemento.vomitado()})
 		game.getObjectsIn(self.position().down(1)).forEach({ elemento => elemento.vomitado()})

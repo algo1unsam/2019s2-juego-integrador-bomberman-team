@@ -19,16 +19,16 @@ class Nivel{
 		
 	method keyboard(){
 	keyboard.space().onPressDo {bomberman.colocarBomba()}
-	keyboard.v().onPressDo{game.say(bomberman,"Me quedan " + bomberman.vidas().toString() + " vidas, baboso.")}
-	keyboard.b().onPressDo{game.say(bomberman,"Me quedan " + bomberman.bombas().toString() + " bombas, baboso.")}
-	keyboard.b().onPressDo{game.say(plantaNuclear,"Me quedan " + plantaNuclear.cuantasBombasHay().toString() + " bombas, baboso.")}
+	keyboard.r().onPressDo {bomberman.nivel().iniciar()}
+
 	}
 	
 	method configuracion() {
+		game.clear()
 		bomberman.reiniciarContador()
 		movimientos.movimiento(bomberman)
 		paredesLimites.construirLimites()
-
+		plantaNuclear.fabricarBombas()
 		self.personajes()
 		self.keyboard()
 		game.schedule(1000,{tablero.contadores()})
@@ -59,43 +59,44 @@ object inicio inherits Nivel {
 }
 
 
+
 object nivel1 inherits Nivel {
 	
 	override method configuracion() {
 		
 		super()
-		
+		plantaNuclear.fabricarBombas()
 		paredesNivel1.paredesNivelUno()
-		
+		plantaNuclear.fabricarBombas()
 		game.whenCollideDo(bomberman,{elemento=>elemento.nosCruzamosConBomberman(bomberman)})
 		game.whenCollideDo(burns,{elemento=>elemento.nosCruzamosConEnemigo(burns)})
 		
 		
 		game.onTick(400,"Patrulla Burns",{burns.patrulla()})
-		game.onTick(10000,"Bart dispara",{bart.disparar()})
-		game.onTick(2000,"Vomitar",{barney.vomitar()})
+		game.onTick(1500,"Vomitar",{barney.vomitar()})
 		
 		
 
 		}
 
 	override method personajes(){
-	
+		bomberman.position(game.at(1,1))
 		game.addVisual(bomberman)
-		game.addVisualIn(tabernaMoe,game.at(12,13))	
+		game.addVisualIn(tabernaMoe,game.at(12,13))		
 		game.addVisualIn(plantaNuclear,game.at(10,3))
 		game.addVisual(burns)
+		burns.position(game.at(6, 13))
 		game.addVisualIn(bart, game.at(13,13))
 		bart.position(game.at(13,13))
 		game.addVisualIn(barney,game.at(4,8))
 		barney.position(game.at(4,8))
-		game.addVisualIn(new Rosquilla(), game.at(2,8))
-		game.addVisualIn(new Rosquilla(), game.at(6,8))
+		game.addVisualIn(new Rosquilla(), game.at(3,8))
+		game.addVisualIn(new Rosquilla(), game.at(5,8))
 		game.addVisualIn(new Rosquilla(), game.at(4,10))
 		game.addVisualIn(new Rosquilla(), game.at(1,13))
 		game.addVisualIn(new Rosquilla(), game.at(12,5))
 		game.addVisualIn(new Rosquilla(), game.at(12,9))
-		
+		game.addVisualIn(trigger, game.at(10,1))
 	}
 }
 
@@ -106,10 +107,15 @@ object nivel2 inherits Nivel{
 	
 	override method configuracion() {
 		super()
+		trigger.trigger(0)
+		bomberman.nivel(self)
 		paredesNivel2.paredesNivelDos()
+		plantaNuclear.fabricarBombas()
 		game.whenCollideDo(bomberman,{elemento=>elemento.nosCruzamosConBomberman(bomberman)})
 		game.whenCollideDo(burns,{elemento=>elemento.nosCruzamosConEnemigo(burns)})
 		
+		game.onTick(400,"Patrulla Burns",{burns.patrulla()})
+		game.onTick(1500,"Vomitar",{barney.vomitar()})
 		
 
 		}
@@ -117,10 +123,32 @@ object nivel2 inherits Nivel{
 	override method personajes(){
 		bomberman.position(game.at(1,1))
 		game.addVisual(bomberman)
-		game.addVisualIn(tabernaMoe,game.at(1,2))
-		game.addVisualIn(plantaNuclear,game.at(10,3))
+		game.addVisualIn(tabernaMoe,game.at(11,13))
+		game.addVisualIn(plantaNuclear,game.at(5,13))
 		game.addVisual(burns)
+		burns.position(game.at(8,9))
 		game.addVisualIn(bart,game.at(13,13))
+		bart.position(game.at(13,13))
+		game.addVisualIn(trigger,game.at(10,6))
+		game.addVisualIn(barney,game.at(4,9))
+		barney.position(game.at(4,9))
+		game.addVisualIn(new Rosquilla(), game.at(1,3))
+		game.addVisualIn(new Rosquilla(), game.at(8,13))
+		game.addVisualIn(new Rosquilla(), game.at(12,10))
+		game.addVisualIn(new Rosquilla(), game.at(12,1))
+		game.addVisualIn(new Rosquilla(), game.at(13,1))
+		game.addVisualIn(new Rosquilla(), game.at(10,1))
 		
 	}
+}
+
+object creditos inherits Nivel {	
+	
+	override method configuracion(){
+		
+		game.clear()
+		game.addVisual(fondo3)
+		game.schedule(5000,{game.stop()})
+	
+}
 }

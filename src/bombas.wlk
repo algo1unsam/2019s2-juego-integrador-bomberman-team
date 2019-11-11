@@ -16,6 +16,10 @@ class Bomba inherits General {
 	override method explotoUnaBomba() {
 		game.removeVisual(self)
 	}
+	
+	override method nosCruzamosConEnemigo(quien){
+		quien.chocarPared()
+	}
 
 	method animacion() {
 		var exp1 = new Explosion()
@@ -55,7 +59,7 @@ class Bomba inherits General {
 // Fin clase Bomba
 class Explosion inherits General {
 
-	method image() = "explosion1.jpg"
+	method image() = "explosion.png"
 
 }
 
