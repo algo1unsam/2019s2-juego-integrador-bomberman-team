@@ -68,6 +68,7 @@ object nivel1 inherits Nivel {
 		plantaNuclear.fabricarBombas()
 		paredesNivel1.paredesNivelUno()
 		plantaNuclear.fabricarBombas()
+		trigger.trigger(0)
 		game.whenCollideDo(bomberman,{elemento=>elemento.nosCruzamosConBomberman(bomberman)})
 		game.whenCollideDo(burns,{elemento=>elemento.nosCruzamosConEnemigo(burns)})
 		
