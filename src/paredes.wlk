@@ -39,7 +39,7 @@ class Pared inherits General {
 
 class HardPared inherits Pared {
 
-	override method image() = "hardblock.png"
+	override method image() = "HardBlock.png"
 
 	override method explotoUnaBomba() {
 	}

@@ -76,13 +76,12 @@ object bomberman inherits General {
 
 	method colocarBomba() {
 		if (bombas == 0) {
-			game.say(self, "No tengo bombas!")
-		} else {
-			var bomba = new Bomba(position = self.position())
-			game.addVisualIn(bomba, game.at(self.position().x(), self.position().y()))
-			bomba.activarBomba()
-			bombas = bombas - 1
+			self.error("No tengo bombas!")
 		}
+		var bomba = new Bomba(position = self.position())
+		game.addVisualIn(bomba, game.at(self.position().x(), self.position().y()))
+		bomba.activarBomba()
+		bombas = bombas - 1
 	}
 
 	override method encontrarRosquilla() {
